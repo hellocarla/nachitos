@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 //MongoDB Connection
 var mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
 mongoose.connect('mongodb+srv://inesdejesusfernandes0:lulupomerania@cluster0.ieqnyka.mongodb.net/oms?retryWrites=true&w=majority');
 
 //Usar JSON
@@ -16,13 +17,16 @@ var port = process.env.PORT || 8081;
 
 //API routes
 //var paisesRoutes=require('./routes/routePaises');
-app.use('/api/paises', paisesRoutes);
+// app.use('/api/paises', paisesRoutes);
 
 //var zonaRoutes=require('./routes/routeZona');
-app.use('/api/zona', zonaRoutes);
+// app.use('/api/zona', zonaRoutes);
 
-//var zonaRoutes=require('./routes/routeZona');
-app.use('/api/zona', zonaRoutes);
+var virusRoutes=require('./routes/routeVirus');
+app.use('/api/virus', virusRoutes);
+
+var surtosRoutes=require('./routes/routeSurtos');
+app.use('/api/surtos', surtosRoutes);
 
 //Start server
 app.listen(port);
