@@ -28,6 +28,9 @@ app.use('/api/virus', virusRoutes);
 var surtosRoutes=require('./routes/routeSurtos');
 app.use('/api/surtos', surtosRoutes);
 
+var recomendacoesRoutes=require('./routes/routeRecomendacoes');
+app.use('/api/recomendacoes', recomendacoesRoutes);
+
 //Start server
 app.listen(port);
 console.log('Magic happens on port ' + port);

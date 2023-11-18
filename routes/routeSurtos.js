@@ -95,7 +95,48 @@ router.get('/virus/:cod_virus', async function (_req,res) {
 
 */
 
-// não há PUTs nem DELETEs aqui
 
+router.put('/:cod_zona/:cod_virus', async function (req, res) {
+    try {
 
-module.exports=router;
+        // Encontra surto com base nos códigos de zona e vírus
+        const surto = await Surtos.findOne({
+            cod_zonageo: req.params.cod_zona,
+            codigo_virus: req.params.cod_virus
+        }).exec();
+
+        // Verifica se pelo menos um surto foi encontrado
+        if (!surto) {
+            return res.json({ message: 'Nenhum surto encontrado para a alteração.' });
+        }
+            if ('data_fim' in req.body) {
+                surto.data_fim = req.body.data_fim;
+                await surto.save();
+        }
+
+        return res.json({ message: 'Data de fim alterada!' });
+    } catch (error) {
+        console.error(error);
+        return res.json({ error: 'Erro no TRY' });
+    }
+});
+
+ /*É SÓ PARA TESTES
+router.delete('/:cod_surto', async function (req, res) {
+    try {
+        const resultadoExclusao = await Surtos.findByIdAndDelete(req.params.cod_surto);
+
+        if (!resultadoExclusao) {
+            return res.json({ message: 'Surto não encontrada ou já excluído!' });
+        }
+        res.json({ message: 'Surto eliminado!' });
+
+    } catch (error) {
+        console.error(error);
+        res.json({ error: 'Erro no TRY!' });
+    }
+});
+
+*/
+
+module.exports = router;
