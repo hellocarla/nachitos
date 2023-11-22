@@ -36,18 +36,12 @@ router.get('/', function (req, res) {
 
 // Get recomendações pelo código do país
 router.get('/:cod_pais/recomendacoes', async function (req, res) {
-    //const pais = await Paises.findOne({cod_pais: req.params.cod_pais}).populate('zona').exec();
     const pais = await Paises.findOne({cod_pais: req.params.cod_pais}).exec();
-    console.log(pais, "ola");
     const zona = await Zona.findById(pais.cod_zonageo).exec();
-    console.log(zona);
     var recs = await Recomendacoes.find({cod_zonageo:zona._id}).exec();
-    console.log(recs, "depois das recs");
     var objetos = [];
-    console.log(objetos, "cucu");
     for (const recomendacao of recs) {
         var fimRecomendacoes = new Date (recomendacao.validade_nota);
-        console.log(fimRecomendacoes, "tete");
         //fimRecomendacoes.setDate(fimRecomendacoes.getDate() + recomendacao.validade_nota);
         var hoje = new Date();
         if(fimRecomendacoes>=hoje){
@@ -92,62 +86,6 @@ router.get('/:cod_pais/surtos', async function (req, res) {
         objetos.push(objeto);
     }
 }
-*/
-
-    /*
-//Pesquisar recomendacoes pelo código do país (accessed at GET http://localhost:8081/api/paises/:cod_pais)
-router.get('/:cod_pais/recomendacoes',function (req, res) {
-    Paises.findById(req.params.cod_pais, async function (err, paises) {
-        if (err)
-            res.send(err);
-        res.json(paises);        
-    });
-    var p = find({cod_pais});
-    var z = p.cod_zonageo;
-    var recs = find (zona.z);
-    console.log(recs);
-});
-
-
-router.get('/:cod_pais/', async function (req, res) {
-    try{
-        const pais = await Paises.find().exec();
-        if (pais){
-            var pais = [];
-            for(const paises of pais){
-                const recs = await Recomendacoes.findById(recomedacoes.cod_zonageo).exec();
-                if(recs){
-                    var carro = new Object();
-                    carro.matricula = car.matricula;
-                    carro.dataRegisto = car.dataRegisto;
-                    carro.dono = dono;
-                    carros.push(carro);
-                }
-            }
-        
-        res.json(carros);
-        }
-    } catch (err){
-        res.send(err);
-    }
-    
-});
-//Pesquisar re
-
-*/
-
-// Pesquisar recomendações pelo código do país (accessed at GET http://localhost:8081/api/paises/:cod_pais)
-/*Ir primeiro buscar cod zona
-router.get('/:cod_pais/recomendacoes',function (req, res) {
-    Paises.findById(req.params.cod_pais, function (err, recs) {
-        var p = find({cod_pais});
-        var z = p.zona;
-        var recs = find (zona.z);  
-        if (err)
-            res.send(err);
-        res.json(recs);
-    });  
-});
 */
 
 module.exports = router;

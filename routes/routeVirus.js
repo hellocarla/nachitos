@@ -23,7 +23,7 @@ router.post('/', function (req, res) {
 });
 
 
-// aqui busca todos os virus
+// GET de todos os virus http://localhost/8082/api/virus
 
 router.get('/', function(req,res) {
     Virus.find(function(err, virus) {
@@ -35,30 +35,19 @@ router.get('/', function(req,res) {
 });
 
 
-
-
-
-// GET: /api/virus/{código_virus}/surtos -- Obter informação todos os surtos ocorridos associados ao vírus referido
-
-
 // on routes that end with /virus/{cod_virus}/surtos
 // ou seja, vai buscar o virus com este ID e mostra os surtos (quando eu perceber como se faz)
 
-//Get todos os surtos de um vírus GET http://localhost:8082/api/virus/{cod_virus}/surtos
+//GET todos os surtos ocorridos de um vírus GET http://localhost:8082/api/virus/{cod_virus}/surtos
 router.get('/:cod_virus/surtos', async function (req, res) {
-    console.log(typeof(req.params.cod_virus), "inicio");
     const viros = await Virus.findOne({cod_virus: req.params.cod_virus}).exec();
-    console.log(viros, "ola");
-    console.log(viros._id);
-    var surtos = await Surtos.find({codigo_virus:viros._id}).exec();
-    console.log(surtos, "após surtos");
+    console.log(viros, "viros");
+    var surtos = await Surtos.find({cod_virus:viros._id}).exec();
     var objetos = [];
-    console.log(objetos, "hello");
-    
     
     for (const surto of surtos) {
         var fimSurto = surto.data_fim;
-        if(fimSurto==null){
+        if(fimSurto!=null){
             objetos.push(surto);
         }
     }

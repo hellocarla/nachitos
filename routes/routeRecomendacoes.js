@@ -25,7 +25,7 @@ router.post('/',function(req, res) {
 });
 
 
-// Vai buscar recomendações ( http://localhost:8081/api/recomendacoes )
+// Vai buscar todas as recomendações ( http://localhost:8081/api/recomendacoes )
 router.get('/',function(_req, res) {
     Recomendacoes.find(function(err, recomendacoes) {
         if (err)
