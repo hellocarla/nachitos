@@ -51,6 +51,7 @@ router.put('/:cod_recomendacao', async function (req, res) {
         // Encontra a recomendação pelo ID
         const recomendacao = await Recomendacoes.findById(req.params.cod_recomendacao);
 
+      
         if (!recomendacao) {
             return res.json({ message: 'Recomendação não encontrada!' });
         }
@@ -77,10 +78,12 @@ router.put('/:cod_recomendacao', async function (req, res) {
 router.delete('/:cod_recomendacao', async function (req, res) {
     try {
         const resultadoExclusao = await Recomendacoes.findByIdAndDelete(req.params.cod_recomendacao);
+
         if (!resultadoExclusao) {
             return res.json({ message: 'Recomendação não encontrada ou já foi excluída!' });
         }
         res.json({ message: 'Recomendação eliminada!' });
+
     } catch (error) {
         console.error(error);
         res.json({ error: 'Erro no TRY!' });
