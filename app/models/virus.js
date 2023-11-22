@@ -2,7 +2,7 @@ var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
 var VirusSchema   = new Schema({
-    cod_virus: {type: Number, nullable:false},
+    cod_virus: {type: String, nullable:false},
     nome_virus: {type: String, nullable:false}
 });
 

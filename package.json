@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "6.12.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "nachitos",
+  "description": "Project based on the creqating of an API based on WHO's database of viruses. The students must use Node.js and mongoose to open a database visible to any user, and implement the CRUD method, accessible only to verified WHO employees.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "",
+  "license": "ISC"
+}

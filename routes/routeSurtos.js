@@ -15,11 +15,8 @@ router.post('/', async function (req, res) {
 
         var surto = new Surtos();      // criar uma instância do modelo de surtos
         surto.cod_surto = req.body.cod_surto;
-        surto.codigo_virus = await Virus.findOne({ nome: req.params.namevirus}).exec();   
-                                                // queria que a função visse se o código do virus faz match com algum que já exista
-                                                // mas acho que assim teria de ser uma função async e quando fiz isso o código não funcionou
-                                                // irei testar essa hipótese outra vez mais tarde
-                                                // I might be on to something...
+        const virus = await Virus.findOne({cod_virus: req.body.cod_virus}).exec();
+        surto.codigo_virus= virus._id;
         surto.cod_zonageo = req.body.cod_zonageo;
         surto.data_inicio = req.body.data_inicio;
         surto.data_fim = req.body.data_fim;
