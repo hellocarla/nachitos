@@ -7,4 +7,3 @@ var ZonaSchema   = new Schema({
 });
 
 module.exports = mongoose.model('zona', ZonaSchema);
-

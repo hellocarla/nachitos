@@ -25,7 +25,7 @@ router.post('/',function(req, res) {
 });
 
 
-// Vai buscar recomendações ( http://localhost:8081/api/recomendacoes )
+// Vai buscar todas as recomendações ( http://localhost:8081/api/recomendacoes )
 router.get('/',function(_req, res) {
     Recomendacoes.find(function(err, recomendacoes) {
         if (err)
@@ -50,7 +50,8 @@ router.put('/:cod_recomendacao', async function (req, res) {
     try {
         // Encontra a recomendação pelo ID
         const recomendacao = await Recomendacoes.findById(req.params.cod_recomendacao);
-    
+
+      
         if (!recomendacao) {
             return res.json({ message: 'Recomendação não encontrada!' });
         }
@@ -88,7 +89,5 @@ router.delete('/:cod_recomendacao', async function (req, res) {
         res.json({ error: 'Erro no TRY!' });
     }
 });
-
 */
 module.exports = router;
-
