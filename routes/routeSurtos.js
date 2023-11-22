@@ -18,7 +18,7 @@ router.post('/', async function (req, res) {
         surto.cod_surto = req.body.cod_surto;
         const virus = await Virus.findOne({cod_virus: req.body.cod_virus}).exec();
         surto.cod_virus= virus._id;
-        const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
+        const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo});
         surto.cod_zonageo = zona._id;
         //surto.cod_zonageo = req.body.cod_zonageo;
         surto.data_inicio = req.body.data_inicio;
@@ -45,6 +45,21 @@ router.get('/', function(_req,res) {
     });
 });
 
+
+router.get('/virus/:cod_virus', async function (req, res) {
+    const viros = await Virus.findOne({cod_virus: req.params.cod_virus}).exec();
+    var surtos = await Surtos.find({cod_virus:viros._id}).exec();
+    var objetos = [];
+    
+    for (const surto of surtos) {
+        var fimSurto = surto.data_fim;
+        if(fimSurto==null){
+            objetos.push(surto);
+        }
+    }
+    res.json(objetos);
+    
+});
 
 
 router.put('/:cod_zona/:cod_virus', async function (req, res) {
@@ -126,4 +141,6 @@ router.delete('/:cod_surto', async function (req, res) {
         res.json({ error: 'Erro no TRY!' });
     }
 });
+*/
+
 module.exports = router;

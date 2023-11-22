@@ -1,16 +1,20 @@
 var express = require('express');  // call express
 var Recomendacoes = require('../app/models/recomendacoes');
+var Pais = require('../app/models/paises');
+var Zona = require('../app/models/zona');
 var router = express.Router(); // get an instance of the express Router
 var mongoose = require('mongoose');
 
-// criar um post da recomendação ( http://localhost:8081/api/recomendacoes )
+// criar um post da recomendação ( http://localhost:8082/api/recomendacoes )
 
-router.post('/',function(req, res) { 
+router.post('/', async function(req, res) { 
 
     var recomendacao = new Recomendacoes();      // cria uma nova instância do modelo Recomendações 
     recomendacao.cod_recomendacao = req.body.cod_recomendacao;
-    recomendacao.cod_pais = req.body.cod_pais;
-    recomendacao.cod_zonageo = req.body.cod_zonageo;
+    const pais = await Pais.findOne({cod_pais: req.body.cod_pais})
+    recomendacao.cod_pais = pais._id;
+    const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
+    recomendacao.cod_zonageo = zona._id;
     recomendacao.data_nota = req.body.data_nota;
     recomendacao.validade_nota = req.body.validade_nota;
     recomendacao.recomendacao_texto = req.body.recomendacao_texto; 
@@ -25,7 +29,7 @@ router.post('/',function(req, res) {
 });
 
 
-// Vai buscar todas as recomendações ( http://localhost:8081/api/recomendacoes )
+// Vai buscar todas as recomendações ( http://localhost:8082/api/recomendacoes )
 router.get('/',function(_req, res) {
     Recomendacoes.find(function(err, recomendacoes) {
         if (err)
@@ -49,7 +53,7 @@ function renovarValidade(dataAtual, diasParaAdicionar) {
 router.put('/:cod_recomendacao', async function (req, res) {
     try {
         // Encontra a recomendação pelo ID
-        const recomendacao = await Recomendacoes.findById(req.params.cod_recomendacao);
+        const recomendacao = await Recomendacoes.findOne({cod_recomendacao: req.params.cod_recomendacao});
 
       
         if (!recomendacao) {
@@ -57,7 +61,7 @@ router.put('/:cod_recomendacao', async function (req, res) {
         }
 
         // Atualiza os campos da recomendação com base nos dados da solicitação
-        recomendacao.cod_recomendacao = recomendacao.cod_recomendacao;
+        //recomendacao.cod_recomendacao = recomendacao.cod_recomendacao;
         recomendacao.data_nota = req.body.data_nota;
         recomendacao.recomendacao_texto = req.body.recomendacao_texto;
 
