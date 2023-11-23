@@ -11,8 +11,8 @@ router.post('/', async function(req, res) {
 
     var recomendacao = new Recomendacoes();      // cria uma nova instância do modelo Recomendações 
     recomendacao.cod_recomendacao = req.body.cod_recomendacao;
-    const pais = await Pais.findOne({cod_pais: req.body.cod_pais})
-    recomendacao.cod_pais = pais._id;
+    //const pais = await Pais.findOne({cod_pais: req.body.cod_pais})
+    //recomendacao.cod_pais = pais._id;
     const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
     recomendacao.cod_zonageo = zona._id;
     recomendacao.data_nota = req.body.data_nota;
