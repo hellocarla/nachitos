@@ -55,5 +55,4 @@ router.get('/:cod_virus/surtos', async function (req, res) {
     
 });
 
-
 module.exports = router;

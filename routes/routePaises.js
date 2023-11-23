@@ -7,11 +7,12 @@ var router = express.Router();
 
 
 //POST http://localhost:8082/api/paises
-router.post('/', function (req, res) {
+router.post('/', async function (req, res) {
     var paises = new Paises();      // create a new instance of the Paises model
     paises.nome_pais = req.body.nome_pais;  // set the paises name (comes from the request)
     paises.cod_pais = req.body.cod_pais;
-    paises.cod_zonageo = req.body.cod_zonageo;
+    const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
+    paises.cod_zonageo = zona._id;
 
     // save the país and check for errors
     paises.save(function (err) {
