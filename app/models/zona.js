@@ -1,9 +1,9 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-// Função para garantir que o cod_zonageo comece com letra maiúscula
+// Função para garantir que o cod_zonageo comece com letra maiúscula.
 function validateCodZonageo(value) {
-    return /^Z\d+/.test(value);        // Usa uma regex para verificar se o valor começa com Z maiusculo
+    return /^Z\d+/.test(value);        // Usa uma regex para verificar se o valor começa com Z maiusculo.
 }
 
 var ZonaSchema   = new Schema({
