@@ -42,8 +42,8 @@ router.get('/:cod_pais/recomendacoes', async function (req, res) {
     var recs = await Recomendacoes.find({cod_zonageo:zona._id}).exec();
     var objetos = [];
     for (const recomendacao of recs) {
-        var fimRecomendacoes = new Date (recomendacao.validade_nota);
-        //fimRecomendacoes.setDate(fimRecomendacoes.getDate() + recomendacao.validade_nota);
+        var fimRecomendacoes = new Date (recomendacao.data_nota);
+        fimRecomendacoes.setDate(fimRecomendacoes.getDate() + recomendacao.validade_nota);
         var hoje = new Date();
         if(fimRecomendacoes>=hoje){
             objetos.push(recomendacao);
