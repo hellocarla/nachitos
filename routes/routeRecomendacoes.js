@@ -19,7 +19,7 @@ router.post('/', async function(req, res) {
     recomendacao.validade_nota = req.body.validade_nota;
     recomendacao.recomendacao_texto = req.body.recomendacao_texto; 
 
-    // save the bear and check for errors
+    // salva a recomendação e faz check dos erros
     recomendacao.save(function(err) {
         if (err)
             res.send(err); 
