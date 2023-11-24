@@ -41,7 +41,6 @@ router.get('/', function(req,res) {
 //GET todos os surtos ocorridos de um vírus GET http://localhost:8082/api/virus/{cod_virus}/surtos
 router.get('/:cod_virus/surtos', async function (req, res) {
     const viros = await Virus.findOne({cod_virus: req.params.cod_virus}).exec();
-    console.log(viros, "viros");
     var surtos = await Surtos.find({cod_virus:viros._id}).exec();
     var objetos = [];
     

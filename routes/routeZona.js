@@ -7,11 +7,9 @@ var router = express.Router();
 
 // POST http://localhost:8082/api/zona
 router.post('/', function (req, res) {
-    console.log(req.body);
     var zona = new Zona();                            // criar instância de modelo de zona
     zona.cod_zonageo = req.body.cod_zonageo;             // aqui vão os valores que queremos
     zona.nome_zonageo = req.body.nome_zonageo;
-    console.log(zona);
     zona.save(function (err) {                         // função para guardar a zona
         if (err){
             res.send(err);

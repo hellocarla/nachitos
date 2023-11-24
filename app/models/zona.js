@@ -1,13 +1,13 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
 
-// Função para garantir que o cod_zonageo comece com letra maiúscula
+// Função para garantir que o cod_zonageo comece com letra maiúscula.
 function validateCodZonageo(value) {
-    return /^[A-Z]/.test(value);        // Usa uma regex para verificar se a primeira letra é maiúscula
+    return /^Z\d+/.test(value);        // Usa uma regex para verificar se o valor começa com Z maiusculo.
 }
 
 var ZonaSchema   = new Schema({
-    cod_zonageo: {type: String, required:true, unique:true, validate: [validateCodZonageo, 'O codigo da zona geografica deve comecar com letra maiuscula']},     
+    cod_zonageo: {type: String, required:true, unique:true, validate: [validateCodZonageo, 'O campo cod_zonageo deve sempre seguir a estrutura de letra Z maiúscula seguida de digitos. Exemplo: Z001']},     
     nome_zonageo: {type: String, required:true, unique:true}
 });
 
