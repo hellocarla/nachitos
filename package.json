@@ -1,15 +1,21 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
-    "mongoose": "6.12.0"
+    "mongoose": "6.12.0",
+    "multer": "^1.4.5-lts.1"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "name": "nachitos",
   "description": "Project based on the creqating of an API based on WHO's database of viruses. The students must use Node.js and mongoose to open a database visible to any user, and implement the CRUD method, accessible only to verified WHO employees.",
   "version": "1.0.0",
   "main": "server.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }

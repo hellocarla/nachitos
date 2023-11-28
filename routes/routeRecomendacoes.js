@@ -2,6 +2,8 @@ var express = require('express');  // call express
 var Recomendacoes = require('../app/models/recomendacoes');
 var Pais = require('../app/models/paises');
 var Zona = require('../app/models/zona');
+//adicionei agora esta linha
+var Surtos = require('../app/models/surtos');
 var router = express.Router(); // get an instance of the express Router
 var mongoose = require('mongoose');
 
@@ -13,25 +15,36 @@ try{
     if (check_recomendacao) {
         return res.status(409).json({ message: 'A recomendação com o código ' + req.body.cod_recomendacao + ' já existe!' });
     }
+    console.log(check_recomendacao, "check recomendação");
+    
     var recomendacao = new Recomendacoes();      // cria uma nova instância do modelo Recomendações 
     recomendacao.cod_recomendacao = req.body.cod_recomendacao;
-    const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
+    
+    /*const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
     if (!zona) {
         return res.status(404).json({ message: 'Zona geográfica com o código ' + req.body.cod_zonageo + ' não encontrada, pais não criado!' });
     }
-
     recomendacao.cod_zonageo = zona._id;
-    recomendacao.data_nota = req.body.data_nota;
-    recomendacao.validade_nota = req.body.validade_nota;
+    */
+
+    // adicionei agora
+    const surto = await Surtos.findOne({cod_surto:req.body.cod_surto}); // Encontra o surto correspondente
+
+        if (!surto) {
+            return res.status(404).json({ message: 'O surto com o código ' + req.body.cod_surto + ' não foi encontrado!' });
+        }
+
+    recomendacao.cod_surto = surto._id;
+
+    //esta parte
+    recomendacao.cod_zonageo = surto.cod_zonageo;
+    recomendacao.data_nota = surto.data_inicio;
+    recomendacao.validade_nota = surto.data_fim;
     recomendacao.recomendacao_texto = req.body.recomendacao_texto; 
 
     // salva a recomendação e faz check dos erros
-    recomendacao.save(function(err) {
-        if (err)
-            res.send(err); 
-
+    await recomendacao.save();
         res.json({ message: 'Recomendação criada!' });
-    });
     }
     catch (error) {
         console.error(error);

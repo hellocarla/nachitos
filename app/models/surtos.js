@@ -9,10 +9,10 @@ var SurtosSchema   = new Schema({
     cod_surto: {type: String, required:true, unique:true, validate: [validateCodSurto, 'O campo cod_surto deve sempre seguir a estrutura de letra S maiúscula seguida de digitos. Exemplo: S001']}, 
     cod_zonageo: {type: Schema.Types.ObjectId, ref: 'zona'},    // FK que liga os surtos à zona 
     data_inicio: {type: Date, required:true},  
-    data_fim: {type: Date, validate: {
+    data_fim: {type: Date, default: null, validate: {
             validator: function(value) {
                 return !this.data_inicio || !value || this.data_inicio <= value;
-            }, message: 'A data de fim deve ser posterior a data de início.'}, default: null},
+            }, message: 'A data de fim deve ser posterior a data de início.'}},
     cod_virus: {type: Schema.Types.ObjectId, ref: 'virus' }
 });
 

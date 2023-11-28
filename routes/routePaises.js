@@ -92,11 +92,14 @@ router.get('/:cod_pais/recomendacoes', async function (req, res) {
 
     var objetos = [];
     for (const recomendacao of recs) {
-        var fimRecomendacoes = new Date (recomendacao.data_nota);
-        fimRecomendacoes.setDate(fimRecomendacoes.getDate() + recomendacao.validade_nota);
-        var hoje = new Date();
-        if(fimRecomendacoes>=hoje){
+        //var fimRecomendacoes = new Date (recomendacao.data_nota);
+        //fimRecomendacoes.setDate(fimRecomendacoes.getDate() + recomendacao.validade_nota);
+        //var hoje = new Date();
+        //if(fimRecomendacoes>=hoje){
+        if(recomendacao.validade_nota==null){
             objetos.push(recomendacao);
+        } else{
+            res.json({ message: 'Destino seguro! Não existem cuidados especiais para este destino' })
         }
     }
     res.json(objetos);
