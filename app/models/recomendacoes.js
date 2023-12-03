@@ -9,7 +9,6 @@ function validarNumeroPositivo(value) {
 }
 
 var RecomendacoesSchema = new Schema({
-    //cod_pais: {type: Schema.Types.ObjectId, ref: 'paises'},     //FK para ligar as recomendações aos países
     cod_recomendacao: {type: String, required:true, unique: true, validate: [validateCodRecomendacao, 'O campo cod_recomendacao deve sempre seguir a estrutura de letra R maiúscula seguida de digitos. Exemplo: R001']}, 
     cod_surto: {type: Schema.Types.ObjectId, ref: 'surtos'},    //FK para ligar as recomendações às surtos
     cod_zonageo: {type: Schema.Types.ObjectId, ref: 'zona'},    //FK para ligar as recomendações às zonas

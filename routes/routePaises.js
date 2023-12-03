@@ -87,7 +87,7 @@ router.get('/:cod_pais/recomendacoes', async function (req, res) {
     var recs = await Recomendacoes.find({cod_zonageo:zona._id}).exec();
 
     if (recs.length===0) {
-        return res.status(404).json({ message: 'Recomendações para zona geográfica com o código ' + req.body.cod_zonageo + ' não encontradas!' });
+        return res.status(404).json({ message: 'Recomendações para zona geográfica com o código ' + zona.cod_zonageo + ' não encontradas!' });
     }
 
     var objetos = [];
@@ -110,7 +110,6 @@ router.get('/:cod_pais/recomendacoes', async function (req, res) {
 
 // GET surtos ativos
 router.get('/:cod_pais/surtos', async function (req, res) {
-    //const pais = await Paises.findOne({cod_pais: req.params.cod_pais}).populate('zona').exec();
     try{
         const pais = await Paises.findOne({cod_pais: req.params.cod_pais}).exec();
     

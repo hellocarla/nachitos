@@ -2,6 +2,7 @@ var express = require('express');  // call express
 var Recomendacoes = require('../app/models/recomendacoes');
 var Pais = require('../app/models/paises');
 var Zona = require('../app/models/zona');
+var Surtos = require('../app/models/surtos');
 var router = express.Router(); // get an instance of the express Router
 var mongoose = require('mongoose');
 
@@ -15,12 +16,20 @@ try{
     }
     var recomendacao = new Recomendacoes();      // cria uma nova instância do modelo Recomendações 
     recomendacao.cod_recomendacao = req.body.cod_recomendacao;
+    
     const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
     if (!zona) {
         return res.status(404).json({ message: 'Zona geográfica com o código ' + req.body.cod_zonageo + ' não encontrada, pais não criado!' });
     }
-
+    
     recomendacao.cod_zonageo = zona._id;
+
+    const surto = await Surtos.findOne({cod_surto:req.body.cod_surto}); // Encontra o surto correspondente
+    if (!surto) {
+        return res.status(404).json({ message: 'O surto com o código ' + req.body.cod_surto + ' não foi encontrado!' });
+    }
+    
+    recomendacao.cod_surto = surto._id;
     recomendacao.data_nota = req.body.data_nota;
     recomendacao.validade_nota = req.body.validade_nota;
     recomendacao.recomendacao_texto = req.body.recomendacao_texto; 
@@ -65,17 +74,6 @@ router.get('/:cod_recomendacao', async function(req, res) {
     }
 });
 
-/*
-// Função para renovar a validade
-function renovarValidade(dataAtual, diasParaAdicionar) {
-    var dataAtualObj = new Date(dataAtual);
-    dataAtualObj.setDate(dataAtualObj.getDate() + diasParaAdicionar);
-    var novaData = dataAtualObj.toISOString().split('T')[0];
-    return novaData;
-}
-*/
-
-
 router.put('/:cod_recomendacao', async function (req, res) {
 try {
     // Encontra a recomendação pelo ID
@@ -92,7 +90,7 @@ try {
     recomendacao.validade_nota = req.body.validade_nota;
 
     // Salva a recomendação
-        /*await*/ recomendacao.save();
+        recomendacao.save();
 
         res.json({ message: 'Código de recomendação editado!' });
     } 
