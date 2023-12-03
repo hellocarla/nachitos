@@ -5,6 +5,8 @@ var Recomendacoes = require('../app/models/recomendacoes');
 var Surtos = require('../app/models/surtos');
 var router = express.Router();
 
+//TO DO - POST não pode aceitar preenchimento vazio " " no nome_pais
+
 
 //POST http://localhost:8082/api/paises
 router.post('/', async function (req, res) {
@@ -16,18 +18,17 @@ router.post('/', async function (req, res) {
     }
         // Verifica se o País com o nome que vai no body já existe
     const check_pais_nome = await Paises.findOne({nome_pais: req.body.nome_pais})
-    if (check_pais_nome.nome_pais === req.body.nome_pais ) {
+    if (check_pais_nome) {
         return res.status(409).json({ message: 'O país com o nome ' + req.body.nome_pais + ' já existe.' });
     }
-    var paises = new Paises();      // create a new instance of the Paises model
-    paises.nome_pais = req.body.nome_pais;  // set the paises name (comes from the request)
-    paises.cod_pais = req.body.cod_pais;
-    const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
-
+        const zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo})
     if (!zona) {
         return res.status(404).json({ message: 'Zona geográfica com o código ' + req.body.cod_zonageo + ' não encontrada, pais não criado!' });
     }
-
+    
+    var paises = new Paises();      // create a new instance of the Paises model
+    paises.nome_pais = req.body.nome_pais;  // set the paises name (comes from the request)
+    paises.cod_pais = req.body.cod_pais;
     paises.cod_zonageo = zona._id;
     paises.save(function (err) {
         if (err)

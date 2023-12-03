@@ -6,6 +6,9 @@ var Surtos = require('../app/models/surtos');
 var router = express.Router(); // get an instance of the express Router
 var mongoose = require('mongoose');
 
+// TO DO - POST não pode aceitar preenchimento vazio " " na "recomendacao_texto".
+//Quando fazemos um POST com cod_recomendacao a vazio " " aparece um erro muito longo, poderia aparecer por exemplo "Tem de preencher todos os campos."
+
 
 // criar um post da recomendação ( http://localhost:8082/api/recomendacoes )
 router.post('/', async function(req, res) { 
@@ -94,6 +97,10 @@ try {
 
         res.json({ message: 'Código de recomendação editado!' });
     } 
+
+    //TO DO quando fazemos o put se não colocarmos os 3 campos continua a aparecer a msg 'Código de recomendação editado!'.
+    //Temos de alterar para que apareça uma msg a dizer os campos obrigatórios.
+    
 catch (error) {
     console.error(error);
     res.json({ error: 'Erro no TRY' });
