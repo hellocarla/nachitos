@@ -38,6 +38,20 @@ router.get('/', function(req,res) {
     });
 });
 
+// Get de um virus específico
+router.get('/:cod_virus', async function(req,res) {
+    try{
+        const virus = await Virus.findOne({cod_virus: req.params.cod_virus});
+        if (!virus) {
+            return res.status(404).json({ message: 'O vírus com o código ' + req.params.cod_virus + ' não existe!' });
+        }
+        res.json(virus);
+    }  
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erro no TRY!' });
+    }
+});
 
 //GET todos os surtos ocorridos de um vírus http://localhost:8082/api/virus/{cod_virus}/surtos
 router.get('/:cod_virus/surtos', async function (req, res) {

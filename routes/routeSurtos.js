@@ -29,7 +29,10 @@ router.post('/', async function (req, res) {
         surto.cod_zonageo = zona._id;
         //surto.cod_zonageo = req.body.cod_zonageo;
         surto.data_inicio = req.body.data_inicio;
-        surto.data_fim = req.body.data_fim;
+        //surto.data_fim = req.body.data_fim; alterámos para o que está abaixo
+        if(req.body.data_fim){
+            surto.data_fim = req.body.data_fim
+        }
 
         // guardar o surto
         surto.save(function (err) {
@@ -118,11 +121,13 @@ router.get('/virus/:cod_virus', async function (req, res) {
 router.put('/:cod_zona/:cod_virus', async function (req, res) {
     try {
         // Encontra surto com base nos códigos de zona e vírus
+        const zona = await Zona.findOne({cod_zonageo: req.params.cod_zona});
+        const virus = await Virus.findOne({cod_virus: req.params.cod_virus});
         const surto = await Surtos.findOne({
-            cod_zonageo: req.params.cod_zona,
-            cod_virus: req.params.cod_virus
+            cod_zonageo: zona._id,
+            cod_virus: virus._id
         }).exec();
-
+        
         // Verifica se pelo menos um surto foi encontrado
         if (!surto) {
             return res.json({ message: 'Nenhum surto encontrado para a alteração!' });
