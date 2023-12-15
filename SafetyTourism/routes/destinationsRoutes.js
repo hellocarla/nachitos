@@ -16,8 +16,8 @@ var router = express.Router();
 // POST WITH JOI (YAY)
 router.post('/', celebrate({
             body: Joi.object({
-                city_name: Joi.string().required().regex(/^[a-zA-Z ]$/),
-                city_desc: Joi.string().min(20).max(280),
+                city_name: Joi.string().required().regex(/^[a-zA-Z]+( [a-zA-Z]+)*$/),
+                city_desc: Joi.string().min(5).max(280),
                 country_name: Joi.string().required()       // fetch from database, check if it needs validation
             })
         }),
@@ -26,23 +26,24 @@ router.post('/', celebrate({
 
 
 // GET all destinations
-// router.get('/', destinationsController.getDestinations);
+router.get('/', destinationsController.getDestinations);
 
-// router.get('/:id', destinationsController.getIdDestination);
+router.get('/:_id', destinationsController.getDestinationById);
 
-// router.get('/:city_name', destinationsController.getNameDestination);
+router.get('/:city_name', destinationsController.getDestinationByName);
 
 // PUT (OR PATCH) a destination by id
 
 // router.put('/:id', destinationsController.putDestination);
 
-// router.put('/:city_name', destinationsController.putNameDestination);
+router.put('/:city_name', destinationsController.updateDestination);
 
 
 // DELETE a destination by id
     //just for testing!!! global warming hasn't erradicated any cities yet
 
 // router.delete('/:city_name', destinationsController.deleteNameDestination);
+router.delete('/:city_name', destinationsController.deleteDestination);
 
 // EXPORT the router so we can import it in the server
 module.exports = router;
