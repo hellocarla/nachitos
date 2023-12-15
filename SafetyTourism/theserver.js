@@ -21,12 +21,9 @@ var port = process.env.port || 8090;        // <-- let's change ports to a commo
 // something goes here...
 
 
-
-
-
 // API routes go here...
 var destinosRoutes = require('./routes/destinationsRoutes');
-app.use('api/destinations', destinosRoutes);
+app.use('/api/destinations', destinosRoutes);
 
 
 
