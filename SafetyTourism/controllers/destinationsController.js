@@ -115,7 +115,7 @@ const getDestinationById = async function (req,res) {
 */
 
 // PUT (edit) specific destination
-const updateDestination = async function (req,res) {
+const updateDestination = async function (req, res) {
     try {
         const update_dest = await Destinations.findOne({city_name: req.params.city_name}).exec();
         if(!update_dest) {
