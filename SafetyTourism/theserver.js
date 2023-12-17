@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 // ##### NO MONGOOSE YET #####
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://pimpim:fadadosdentes@cluster0.1tlphoo.mongodb.net/?retryWrites=true&w=majority')
-//mongoose.connect('mongodb+srv://inesdejesusfernandes0:lulupomerania@cluster0.ieqnyka.mongodb.net/oms?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://pimpim:OCgI7DrXl8fjBqVF@cluster0.1tlphoo.mongodb.net/?retryWrites=true&w=majority')
+
 
 //Usar JSON
 app.use(bodyParser.urlencoded({extended:true}));
@@ -22,17 +22,11 @@ var port = process.env.port || 8090;        // <-- let's change ports to a commo
 
 
 // API routes go here...
-var destinosRoutes = require('./routes/destinationsRoutes');
-app.use('/api/destinations', destinosRoutes);
+//var destinosRoutes = require('./routes/destinationsRoutes');
+//app.use('/api/destinations', destinosRoutes);
 
-
-
-// START
-    // there's a better way to do this, find it
-    /*
-app.listen(port);
-console.log('Open the gates: ' + port);
-*/
+var reservasRoutes = require('./routes/reservationsRoutes');
+app.use('/api/reservations', reservasRoutes);
 
 
 app.listen(8090, () => {

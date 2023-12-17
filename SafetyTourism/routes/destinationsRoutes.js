@@ -30,7 +30,7 @@ router.get('/', destinationsController.getDestinations);
 
 router.get('/:_id', destinationsController.getDestinationById);
 
-router.get('/:city_name', destinationsController.getDestinationByName);
+router.get('/city/:city_name', destinationsController.getDestinationByName);
 
 // PUT (OR PATCH) a destination by id
 
