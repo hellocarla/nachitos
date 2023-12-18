@@ -1,5 +1,4 @@
 // IMPORTS
-const destinations = require('../models/destinations');
 const Destinations = require('../models/destinations');
 // IMPORT country from API1
 // const Paises = require('../../API_OMS/models/paises');
