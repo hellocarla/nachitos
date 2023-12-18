@@ -28,7 +28,10 @@ app.use('/api/destinations', destinosRoutes);
 var reservasRoutes = require('./routes/reservationsRoutes');
 app.use('/api/reservations', reservasRoutes);
 
+var pacotesRoutes = require('./routes/packagesRoutes');
+app.use('/api/packages', pacotesRoutes);
 
+//Server
 app.listen(8090, () => {
     console.log("This bitch be running like " + port + " hogs");
 });
