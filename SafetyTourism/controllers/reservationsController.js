@@ -2,12 +2,12 @@
 const reservations = require('../models/reservations');
 const Reservations = require('../models/reservations');
 // IMPORT users
-//const Users = require('../models/users');
+const Users = require('../models/users');
 // IMPORT packages
-//const Packages = require('../models/packages');
+const Packages = require('../models/packages');
 
 // POST (& save) Reservation http://localhost:8090/api/reservations
-const postReservations =  async function (req,res) {
+/*const postReservations =  async function (req,res) {
     try {
     var reservation = new Reservations({
         res_client: req.body.res_client,
@@ -28,30 +28,28 @@ const postReservations =  async function (req,res) {
         res.status(500).json({message: "erro do try"});
     }
 };
+*/
 
-/*const postReservations =  async function (req,res) {
+const postReservations =  async function (req,res) {
 try {
-    const check_client = await Users.findOne({_id: req.body.res_client})
+    var check_client = await Users.findOne({_id: req.body.res_client})
     
     //Se o cliente não existir, envia uma resposta a indicar que não foi encontrado
     if(!check_client) {
         return res.status(404).json({message: "Esse cliente não existe!"})
     }
-    
+
     const check_package = await Packages.findOne({_id: req.body.res_package})
-    
     //Se o pacote não existir, envia uma resposta a indicar que não foi encontrado
     if(!check_package) {
         return res.status(404).json({message: "Esse pacote de viagem não existe!"})
     }
 
-    var reservation = new Reservations({
-        reservation.res_client: users._id,
-        reservation.res_package: packages._id
-    });
+    var reservation = new Reservations ();
+    reservation.res_client = check_client.user_name;
+    reservation.res_package = check_package.pack_type;
 
-
-destination.save(function(err) {
+reservation.save(function(err) {
     if(err) {
         res.send(err),
         console.log("erro ao guardar a cidade");
@@ -65,7 +63,6 @@ catch (error) {
     res.status(500).json({message: "erro do try"});
 }
 };
-*/
 
 
 // GET all reservations
