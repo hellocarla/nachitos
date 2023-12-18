@@ -4,7 +4,7 @@ var express  = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
-// ##### NO MONGOOSE YET #####
+// MONGOOSE
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb+srv://pimpim:OCgI7DrXl8fjBqVF@cluster0.1tlphoo.mongodb.net/?retryWrites=true&w=majority')
@@ -30,6 +30,9 @@ app.use('/api/reservations', reservasRoutes);
 
 var pacotesRoutes = require('./routes/packagesRoutes');
 app.use('/api/packages', pacotesRoutes);
+
+var usersRoutes = require('./routes/usersRoutes');
+app.use('/api/users', usersRoutes);
 
 //Server
 app.listen(8090, () => {
