@@ -71,47 +71,6 @@ const getDestinationById = function (req, res) {
     });
 };
 
-
-/*
-const getDestinationById = async function (req, res) {
-    try {
-        var dest_id = await Destinations.findOne({city_name: req.params.city_name}).exec();
-        if(!dest_id) {
-            return res.status(404).json({message: "cidade não existe"});
-        }
-        const results = await Destinations.findById(dest_id._id);
-        if (!results) {
-            return res.json({message: "cidade já buscada ou nunca existiu"});
-        }
-        res.json({message: "yoinked"});
-    }
-    catch (error) {
-        console.error(error);
-        res.json({error: "erro durante o try -- get by id"});
-    }
-};
-*/
-
-
-
-
-/*
-const getDestinationById = async function (req,res) {
-    try {
-        var check_destinationById = await Destinations.getElementById(req.params._id).exec();
-        console.log("cidade " + _id);
-        if(!check_destinationById) {
-            return res.status(404).json({message: "city does not exist!"})
-        }
-        res.json(check_destinationById);
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({message: "erro durante o try"});
-    }
-}
-*/
-
 // PUT (edit) specific destination
 const updateDestination = async function (req, res) {
     try {

@@ -4,7 +4,7 @@ var express  = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
-// ##### NO MONGOOSE YET #####
+// MONGOOSE
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb+srv://pimpim:OCgI7DrXl8fjBqVF@cluster0.1tlphoo.mongodb.net/?retryWrites=true&w=majority')
