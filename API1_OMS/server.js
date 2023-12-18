@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 //MongoDB Connection
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://inesdejesusfernandes0:lulupomerania@cluster0.ieqnyka.mongodb.net/oms?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://inesdejesusfernandes0:cockerspaniel@cluster0.ieqnyka.mongodb.net/oms?retryWrites=true&w=majority');
 
 //Usar JSON
 app.use(bodyParser.urlencoded({extended:true}));

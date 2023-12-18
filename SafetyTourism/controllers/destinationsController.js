@@ -66,7 +66,6 @@ const getDestinationByName = async function (req,res) {
 
 const getDestinationById = function (req, res) {
     Destinations.findById(req.params._id, function (err, destination) {
-        console.log("hey " + req.params._id);
         if (err)
             res.send(err);
         res.json(destination);
