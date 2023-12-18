@@ -9,11 +9,6 @@ const Reservations = require('../models/reservations');
 // POST (& save) Reservation http://localhost:8090/api/reservations
 const postReservations =  async function (req,res) {
     try {
-    const check_reservation = await Reservations.findOne({res_client: req.body.res_client})
-    if(check_reservation) {
-        return res.status(409).json({message: "Esse cliente já tem uma reserva!"})
-    }
-
     var reservation = new Reservations({
         res_client: req.body.res_client,
         res_package: req.body.res_package          
@@ -102,7 +97,7 @@ const getReservationById = async function (req, res) {
 // GET reservation by client ID 
 const getReservationByClient = async function (req,res) {
     try {
-        const check_client = await Reservations.findOne({res_client: req.params.res_client}).exec();
+        const check_client = await Reservations.find({res_client: req.params.res_client}).exec();
         if(!check_client) {
             return res.status(404).json({message: "Cliente não existe!"})
         }
@@ -135,27 +130,6 @@ const updateReservationById = async function (req,res) {
     }
 };
 
-// UPDATE reservation by client ID 
-const updateReservationByClient = async function (req,res) {
-    try {
-        const update_reserva = await Reservations.findOne({res_client: req.params.res_client}).exec();
-        if(!update_reserva) {
-            return res.json({message: "Reserva não encontrada"});
-        }
-
-        update_reserva.res_client = req.body.res_client;
-        update_reserva.res_package = req.body.res_package;
-            await update_reserva.save();
-
-        return res.json({message: "Reserva actualizada!"});
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({message: "erro no try"});
-    }
-};
-
-
 // DELETE a reservation by ID
 const deleteReservationById = async function (req, res) {
     try {
@@ -175,24 +149,6 @@ const deleteReservationById = async function (req, res) {
     }
 };
 
-// DELETE a reservation by ID
-const deleteReservationByClient = async function (req, res) {
-    try {
-        const del_reservation = await Reservations.findOne({res_client:req.params.res_client}).exec();
-        if(!del_reservation) {
-            return res.status(404).json({message: "Reserva não existe"});
-        }
-        const resultado = await Reservations.findByIdAndDelete(del_reservation._id);
-        if (!resultado) {
-            return res.json({message: "Reserva já apagada ou nunca existiu"});
-        }
-        res.json({message: "Reserva apagada"});
-    }
-    catch (error) {
-        console.error(error);
-        res.json({error: "erro durante o try"});
-    }
-};
 
 // EXPORT a pointer to the controller functions so we can import & point to it in the routes
 module.exports= {
@@ -201,7 +157,5 @@ module.exports= {
     getReservationById,
     getReservationByClient,
     updateReservationById,
-    updateReservationByClient,
-    deleteReservationById,
-    deleteReservationByClient
+    deleteReservationById
     }

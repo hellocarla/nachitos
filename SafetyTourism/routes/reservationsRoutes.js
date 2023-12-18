@@ -25,20 +25,14 @@ router.get('/', reservationsController.getReservations);
 // GET reservation by ID 
 router.get('/:_id', reservationsController.getReservationById);
 
-// GET reservation by client ID 
+// GET reservations by client ID 
 router.get('/reservation/:res_client', reservationsController.getReservationByClient);
 
 // UPDATE reservation by ID
 router.put('/:_id', reservationsController.updateReservationById);
 
-// UPDATE reservation by client ID 
-router.put('/reservation/:res_client', reservationsController.updateReservationByClient);
-
 // DELETE reservation by ID
 router.delete('/:_id', reservationsController.deleteReservationById);
-
-// DELETE reservation by client ID
-router.delete('/reservation/:res_client', reservationsController.deleteReservationByClient);
 
 // EXPORT the router so we can import it in the server
 module.exports = router;
