@@ -6,6 +6,10 @@ const { celebrate, Joi } = require('celebrate');
 // IMPORT the controller
 const destinationsController = require('../controllers/destinationsController');
 var router = express.Router();
+// Ligação à API OMS
+var APIligacao = require('node-rest-client').Client;
+var APIaddress = "http://localhost:8080/api/paises";
+
 
 // POST new destination
 //Router.post('/', destinationsController.postDestinations);      //controllerName.functionName
@@ -16,9 +20,10 @@ var router = express.Router();
 // POST WITH JOI (YAY)
 router.post('/', celebrate({
             body: Joi.object({
-                city_name: Joi.string().required().regex(/^[a-zA-Z]+( [a-zA-Z]+)*$/),
-                city_desc: Joi.string().min(5).max(280),
-                country_name: Joi.string().required()       // fetch from database, check if it needs validation
+                //city_name: Joi.string().required().regex(/^[a-zA-Z]+( [a-zA-Z]+)*$/),
+                city_name: Joi.string().required().regex(/^[a-zA-ZÀ-ÖØ-öø-ÿÇç\s]+$/),
+                city_desc: Joi.string().min(5).max(280).regex(/^[a-zA-ZÀ-ÖØ-öø-ÿÇç\s]+$/),
+                country_name: Joi.string().required().regex(/^[a-zA-ZÀ-ÖØ-öø-ÿÇç\s]+$/)     // fetch from database, check if it needs validation
             })
         }),
     destinationsController.postDestinations

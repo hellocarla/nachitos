@@ -1,0 +1,64 @@
+[
+    {
+        "res_clientId": "1",
+        "res_packageId": "6581758fb3a45ea215edb353"
+    },
+    
+    //Clientes sem dados para reserva (NIF, morada, telefone)
+    {
+        "res_clientId": "4",
+        "res_packageId": "65817a2fb3a45ea215edb362"
+    },
+    {
+        "res_clientId": "5",
+        "res_packageId": "65817a3bb3a45ea215edb365"
+    },
+    {
+        "res_clientId": "6",
+        "res_packageId": "65817a48b3a45ea215edb368"
+    },
+    {
+        "res_clientId": "7",
+        "res_packageId": "65817a52b3a45ea215edb36b"
+    },
+    {
+        "res_clientId": "8",
+        "res_packageId": "65817a5eb3a45ea215edb36e"
+    },
+    {
+        "res_clientId": "9",
+        "res_packageId": "65817a66b3a45ea215edb371"
+    },
+    {
+        "res_clientId": "10",
+        "res_packageId": "65817a6fb3a45ea215edb374"
+    },
+    {
+        "res_clientId": "11",
+        "res_packageId": "65817a7ab3a45ea215edb377"
+    },
+    {
+        "res_clientId": "12",
+        "res_packageId": "65817a85b3a45ea215edb37a"
+    },
+    {
+        "res_clientId": "13",
+        "res_packageId": "65817a90b3a45ea215edb37d"
+    },
+    {
+        "res_clientId": "14",
+        "res_package": "65817abbede79f8d478020ef"
+    },
+    {
+        "res_clientId": "15",
+        "res_packageId": "65817accede79f8d478020f2"
+    },
+    {
+        "res_clientId": "16",
+        "res_packageId": "65817ad5ede79f8d478020f5"
+    },
+    {
+        "res_clientId": "17",
+        "res_packageId": "65817adfede79f8d478020f8"
+}
+]
