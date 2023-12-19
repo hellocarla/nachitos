@@ -2,6 +2,11 @@
 const Destinations = require('../models/destinations');
 // IMPORT country from API1
 // const Paises = require('../../API_OMS/models/paises');
+var APIligacao = require('node-rest-client').Client;
+var APIaddress = "http://localhost:8080/api/paises";
+
+//POST
+
 
 
 // POST (& save) Destination

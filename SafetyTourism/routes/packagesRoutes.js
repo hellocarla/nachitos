@@ -10,8 +10,8 @@ var router = express.Router();
 // POST WITH JOI (YAY)
 router.post('/', celebrate({
     body: Joi.object({
-        city: Joi.string().required(),
-        pack_desc: Joi.string().min(5).max(280),
+        cityId: Joi.string().required(),
+        pack_desc: Joi.string().min(5).max(280).regex(/^[a-zA-ZÀ-ÖØ-öø-ÿÇç\s]+$/),
         pack_price: Joi.string().required(),
         pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião').required()
     })

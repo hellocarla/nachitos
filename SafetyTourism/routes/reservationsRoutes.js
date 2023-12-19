@@ -11,8 +11,8 @@ var router = express.Router();
 // POST of new reservation WITH JOI (YAY)
 router.post('/', celebrate({
             body: Joi.object({
-                res_client: Joi.string().required(),
-                res_package: Joi.string().required()
+                res_clientId: Joi.string().required(),
+                res_packageId: Joi.string().required()
             })
         }),
     reservationsController.postReservations
@@ -26,7 +26,7 @@ router.get('/', reservationsController.getReservations);
 router.get('/:_id', reservationsController.getReservationById);
 
 // GET reservations by client ID 
-router.get('/reservation/:res_client', reservationsController.getReservationByClient);
+router.get('/reservation/:res_clientId', reservationsController.getReservationByClient);
 
 // UPDATE reservation by ID
 router.put('/:_id', reservationsController.updateReservationById);

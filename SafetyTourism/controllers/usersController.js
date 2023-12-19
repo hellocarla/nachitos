@@ -10,9 +10,10 @@ const createUser = async function (req,res) {
     }
 
     var user = new Users({
+        userId: req.body.userId,
         user_name: req.body.user_name,
         user_email: req.body.user_email,
-        user_password: req.body.user_password
+        user_pw: req.body.user_pw
     });
 
     user.save(function(err) {
@@ -42,7 +43,16 @@ const getUsers = function (req,res) {
 
 // GET user by id
 const getUserById = function (req,res) {
-    Users.findById(req.params.id, function(err, thisguy) {
+    Users.findById(req.params._id, function(err, thisguy) {
+        if(err)
+            res.send(err);
+        res.json(thisguy);
+    });
+};
+
+// GET user by code
+const getUserByCode = function (req,res) {
+    Users.findOne(req.params.userId, function(err, thisguy) {
         if(err)
             res.send(err);
         res.json(thisguy);
@@ -68,14 +78,14 @@ const getUserByName = async function (req,res) {
 // needs to be changed to PATCH instead
 const updateUser = async function (req,res) {
     try {
-        const update_user = await Users.findById(req.params.id).exec();
+        const update_user = await Users.findById(req.params.userId).exec();
         if(!update_user) {
             return res.json({message: "user not found, search better"});
         }
 
             update_user.user_name = req.body.user_name;
             update_user.user_email = req.body.user_email;
-            update_user.user_password = req.body.user_password;
+            update_user.user_pw = req.body.user_pw;
             update_user.user_address = req.body.user_address;
             update_user.user_postal = req.body.user_postal;
             update_user.user_phone = req.body.user_phone;
@@ -94,11 +104,11 @@ const updateUser = async function (req,res) {
 // DELETE user
 const deleteUser = async function(req,res) {
     try {
-        var delete_user = await Users.findById({id: req.params.id}).exec();
+        var delete_user = await Users.findById({userId: req.params.userId}).exec();
         if(!delete_user) {
             return res.status(404).json({message: "user isn't real. this is all a simulation."});
         }
-        const results = await Users.findByIdAndDelete(delete_user.id);
+        const results = await Users.findByIdAndDelete(delete_user.userId);
 
         if(!results) {
             return res.json({message: "deleted user (or they never existed...)"});
@@ -116,6 +126,7 @@ module.exports= {
     createUser,
     getUsers,
     getUserById,
+    getUserByCode,
     getUserByName,
     updateUser,
     deleteUser

@@ -46,14 +46,15 @@ const getPackagesByName = async function (req, res) {
 // POST de um Pacote
 const postPackages = async function (req, res) {
     try {
-    const check_city = await Destinations.findById(req.body.city).exec()
+    const check_city = await Destinations.findById(req.body.cityId).exec()
     if(!check_city) {
         console.log(check_city);
-        return res.status(409).json({ message: "A cidade já existe."})
+        return res.status(409).json({ message: "A cidade indicada não existe."})
     }
     
     var packages = Packages ({
-        city: check_city._id,
+        cityId: check_city._id,
+        city: check_city.city_name,
         pack_desc: req.body.pack_desc,
         pack_price: req.body.pack_price + ' eur',
         pack_type: req.body.pack_type

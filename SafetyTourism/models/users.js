@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 // will be using SQL for this, make appropriate changes
 
 const UsersSchema = new Schema({
-    user_id: { type: String },        // if SQL, then starting at xxxx and incrementing automatically (PRIMARY KEY, NOTNULL, AUTOINCREMENT)
+    userId: { type: String, required:true },        // if SQL, then starting at xxxx and incrementing automatically (PRIMARY KEY, NOTNULL, AUTOINCREMENT)
     // { autoincrement: true}
     // confirmar como começar o campo do id para prevenir SQL injection
     user_name: { type: String, required: true },

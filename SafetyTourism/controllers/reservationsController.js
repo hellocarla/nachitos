@@ -32,29 +32,38 @@ const Packages = require('../models/packages');
 
 const postReservations =  async function (req,res) {
 try {
-    var check_client = await Users.findOne({_id: req.body.res_client})
+    var check_client = await Users.findOne({user_id: req.body.res_clientId})
     
     //Se o cliente não existir, envia uma resposta a indicar que não foi encontrado
     if(!check_client) {
-        return res.status(404).json({message: "Esse cliente não existe!"})
-    }
-
-    const check_package = await Packages.findOne({_id: req.body.res_package})
+        return res.status(404).json({message: "Este cliente não existe!"})
+    } else {
+        if(check_client.user_address==null || check_client.user_postal==null ||check_client.user_phone==null || check_client.user_nif==null){
+            return res.json({message: "Preencha os campos em falta, nabiça!"})
+        }
+    };
+    
+    //Se o cliente existir tem de ter user_adress, user_postal, user_phone, user_nif com os dados.
+   
+    const check_package = await Packages.findOne({_id: req.body.res_packageId})
     //Se o pacote não existir, envia uma resposta a indicar que não foi encontrado
     if(!check_package) {
-        return res.status(404).json({message: "Esse pacote de viagem não existe!"})
+        return res.status(404).json({message: "Este pacote de viagem não existe!"})
     }
 
     var reservation = new Reservations ();
+    reservation.res_clientId = check_client.user_id
     reservation.res_client = check_client.user_name;
+    reservation.res_city = check_package.city;
+    reservation.res_packageId = check_package._id;
     reservation.res_package = check_package.pack_type;
 
 reservation.save(function(err) {
     if(err) {
         res.send(err),
-        console.log("erro ao guardar a cidade");
+        console.log("erro ao guardar a reserva");
     } else {
-        res.json({ message: 'new city unlocked!' });
+        res.json({ message: 'Nova reserva criada!' });
     }
 });
 }
