@@ -1,13 +1,21 @@
 // IMPORTS
+const { exists } = require('../../API1_OMS/app/models/paises');
 const Destinations = require('../models/destinations');
 // IMPORT country from API1
 // const Paises = require('../../API_OMS/models/paises');
 var APIligacao = require('node-rest-client').Client;
 var APIaddress = "http://localhost:8080/api/paises";
 
-//POST
-
-
+//GET info from API OMS
+var paises = new APIligacao();
+paises.get(APIaddress, function(dados, res) {
+for(let index=0; index<dados.length; index++){
+    const element = dados[index];
+    console.log(index+1);
+    console.log(element.cod_pais);
+    console.log(element.nome_pais);
+    }
+});
 
 // POST (& save) Destination
     // this function probably doesn't work! it's just an example with probably wrong syntax
@@ -17,11 +25,18 @@ const postDestinations =  async function (req,res) {
     if(check_city) {
         return res.status(409).json({message: "Essa cidade já existe!"})
     }
+    console.log("inicio");
+    const check_pais = await paises.find({nome_pais: req.body.country_name})
+    console.log("ola" + req.body.country_name);
+    if(!check_pais){
+        return res.status(404).json({message: "O país indicado não existe!"});
+    }
 
+    if(req.body.country_name)
     var destination = new Destinations({
         city_name: req.body.city_name,
         city_desc: req.body.city_desc,
-        country_name: req.body.country_name     // fetch from database API1
+        country_name: check_pais.nome_pais     // fetch from database API1
     });
 
     destination.save(function(err) {

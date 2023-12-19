@@ -16,19 +16,19 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 8080;
 
 //API routes
-var paisesRoutes=require('../routes/routePaises');
+var paisesRoutes=require('./routes/routePaises');
 app.use('/api/paises', paisesRoutes);
 
-var zonaRoutes=require('../routes/routeZona');
+var zonaRoutes=require('./routes/routeZona');
 app.use('/api/zona', zonaRoutes);
 
-var virusRoutes=require('../routes/routeVirus');
+var virusRoutes=require('./routes/routeVirus');
 app.use('/api/virus', virusRoutes);
 
-var surtosRoutes=require('../routes/routeSurtos');
+var surtosRoutes=require('./routes/routeSurtos');
 app.use('/api/surtos', surtosRoutes);
 
-var recomendacoesRoutes=require('../routes/routeRecomendacoes');
+var recomendacoesRoutes=require('./routes/routeRecomendacoes');
 app.use('/api/recomendacoes', recomendacoesRoutes);
 
 //Start server
