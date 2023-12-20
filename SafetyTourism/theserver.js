@@ -34,6 +34,9 @@ app.use('/api/packages', pacotesRoutes);
 var usersRoutes = require('./routes/usersRoutes');
 app.use('/api/users', usersRoutes);
 
+var countryRoutes = require('./routes/countryRoutes');
+app.use('/api/country', countryRoutes);
+
 //Server
 app.listen(8090, () => {
     console.log("This bitch be running like " + port + " hogs");

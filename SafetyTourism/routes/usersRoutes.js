@@ -36,9 +36,9 @@ router.post('/', celebrate({
 router.get('/', usersController.getUsers);
 
 // GET user by _id 
-router.get('/:_id', usersController.getUserById);
+//router.get('/:_id', usersController.getUserById);
 
-// GET user by userId 
+// GET user by code(user_id) 
 router.get('/user/:userId', usersController.getUserByCode);
 
 // GET user by client ID 
