@@ -77,8 +77,47 @@ router.get('/:cod_surto', async function (req, res) {
      }
 });
 
+//Get dos surtos ativos pelo código de zona
+router.get('/zona/:cod_zonageo', async function (req, res) {
+    try {
+        const zones = await Surtos.find({ cod_zonageo: req.params.cod_zonageo }).exec();
+        console.log(req.params.cod_zonageo);
+        // Se a zona não existir, envia uma resposta a indicar que não foi encontrada
+        if (!zones) {
+            return res.status(404).json({ message: 'Zona com o código ' + req.params.cod_zonageo + ' não encontrada!' });
+        }
 
-// Get dos vírus pelo código de vírus
+        //var surtos = await Surtos.find({ cod_virus: viros._id }).exec();
+
+        // Se nenhum surto for encontrado, envia uma resposta a indicar que não foram encontrados surtos
+        if (zones.length === 0) {
+            return res.status(404).json({ message: 'Não existe nenhum surto associado à zona ' + req.params.cod_zonageo });
+        }
+
+        var objetos = [];
+
+        for (const zone of zones) {
+            var fimSurto = zone.data_fim;
+            if (fimSurto == null) {
+                objetos.push(zone);
+            }
+        }
+                // Se não existir nenhum surto ativo, retorna a mensagem que não foi encontrado nenhum surto
+        if (objetos.length===0){
+
+            res.json({ message:'Nenhum surto encontrado que corresponda aos parâmetros de pesquisa',
+        ativos:0});
+        }
+        else {
+            res.json(objetos);
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erro no TRY!' });
+    }
+});
+
+// Get dos surtos ativos pelo código de vírus
 router.get('/virus/:cod_virus', async function (req, res) {
     try {
         const viros = await Virus.findOne({ cod_virus: req.params.cod_virus }).exec();
@@ -92,7 +131,7 @@ router.get('/virus/:cod_virus', async function (req, res) {
 
         // Se nenhum surto for encontrado, envia uma resposta a indicar que não foram encontrados surtos
         if (surtos.length === 0) {
-            return res.status(404).json({ message: 'Não existe nenhum surte associado ao virus ' + viros.nome_virus });
+            return res.status(404).json({ message: 'Não existe nenhum surto associado ao virus ' + viros.nome_virus });
         }
 
         var objetos = [];

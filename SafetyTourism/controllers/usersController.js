@@ -41,7 +41,7 @@ const getUsers = function (req,res) {
     });
 };
 
-// GET user by id
+/* GET user by id
 const getUserById = function (req,res) {
     Users.findById(req.params._id, function(err, thisguy) {
         if(err)
@@ -49,14 +49,31 @@ const getUserById = function (req,res) {
         res.json(thisguy);
     });
 };
+*/
 
 // GET user by code
-const getUserByCode = function (req,res) {
+/*const getUserByCode = function (req,res) {
     Users.findOne(req.params.userId, function(err, thisguy) {
+        console.log(req.params.userId);
         if(err)
             res.send(err);
         res.json(thisguy);
     });
+};
+*/
+
+const getUserByCode = async function (req,res) {
+    try {
+        const check_user = await Users.find({userId: req.params.userId}).exec();
+        if(!check_user) {
+            return res.status(404).json({message: "User não existe!"})
+        }
+        res.json(check_user);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({message: "erro durante o try"});
+    }
 };
 
 // GET user by name
@@ -125,7 +142,7 @@ const deleteUser = async function(req,res) {
 module.exports= {
     createUser,
     getUsers,
-    getUserById,
+    //getUserById,
     getUserByCode,
     getUserByName,
     updateUser,

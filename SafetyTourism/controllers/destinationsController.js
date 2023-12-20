@@ -1,58 +1,56 @@
 // IMPORTS
-const { exists } = require('../../API1_OMS/app/models/paises');
 const Destinations = require('../models/destinations');
-// IMPORT country from API1
-// const Paises = require('../../API_OMS/models/paises');
-var APIligacao = require('node-rest-client').Client;
-var APIaddress = "http://localhost:8080/api/paises";
+const countryController = require('./countryController');
+const axios = require('axios');
 
-//GET info from API OMS
-var paises = new APIligacao();
-paises.get(APIaddress, function(dados, res) {
-for(let index=0; index<dados.length; index++){
-    const element = dados[index];
-    console.log(index+1);
-    console.log(element.cod_pais);
-    console.log(element.nome_pais);
+// POST (& save) Destination
+
+    // Lista de países obtida anteriormente
+    let listaPaises;
+
+countryController.getCountries({}, {
+    json: function (countries) {
+        listaPaises = countries;
     }
 });
 
-// POST (& save) Destination
-    // this function probably doesn't work! it's just an example with probably wrong syntax
-const postDestinations =  async function (req,res) {
+const postDestinations = async function (req, res) {
     try {
-    const check_city = await Destinations.findOne({city_name: req.body.city_name})
-    if(check_city) {
-        return res.status(409).json({message: "Essa cidade já existe!"})
-    }
-    console.log("inicio");
-    const check_pais = await paises.find({nome_pais: req.body.country_name})
-    console.log("ola" + req.body.country_name);
-    if(!check_pais){
-        return res.status(404).json({message: "O país indicado não existe!"});
-    }
-
-    if(req.body.country_name)
-    var destination = new Destinations({
-        city_name: req.body.city_name,
-        city_desc: req.body.city_desc,
-        country_name: check_pais.nome_pais     // fetch from database API1
-    });
-
-    destination.save(function(err) {
-        if(err) {
-            res.send(err),
-            console.log("erro ao guardar a cidade");
-        } else {
-            res.json({ message: 'new city unlocked!' });
+        if (!listaPaises) {
+            return res.status(500).json({ message: "Lista de países não foi carregada." });
         }
-    });
-    }
-    catch (error) {
+
+        const countryExists = listaPaises.some(pais => pais.nome_pais === req.body.country_name);
+
+        if (!countryExists) {
+            return res.status(404).json({ message: "Este país não existe na lista de países." });
+        }
+
+        const checkCity = await Destinations.findOne({ city_name: req.body.city_name });
+
+        if (checkCity) {
+            return res.status(409).json({ message: "Essa cidade já existe!" });
+        }
+
+        const destination = new Destinations({
+            city_name: req.body.city_name,
+            city_desc: req.body.city_desc,
+            country_name: req.body.country_name
+        });
+
+        destination.save(function (err) {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: "Erro ao guardar a cidade." });
+            }
+            res.json({ message: 'Nova cidade criada!' });
+        });
+    } catch (error) {
         console.error(error);
-        res.status(500).json({message: "erro do try"});
+        res.status(500).json({ message: "Erro interno ao tentar criar a cidade." });
     }
 };
+
 
 // GET all destinations
 const getDestinations = function (req,res) {
@@ -64,7 +62,7 @@ const getDestinations = function (req,res) {
     });
 };
 
-
+/*
 // GET specific destination by name
 const getDestinationByName = async function (req,res) {
     try {
@@ -79,6 +77,54 @@ const getDestinationByName = async function (req,res) {
         res.status(500).json({message: "erro durante o try"});
     }
 
+}
+*/
+
+// GET specific destination by name
+const getDestinationByName = async function (req, res) {
+    try {
+        // Encontrar o destino pelo city_name
+        const check_destination = await Destinations.findOne({ city_name:req.params.city_name}).exec();
+        
+        if (!check_destination) {
+            return res.status(404).json({ message: "Cidade não encontrada!" });
+        }
+        
+        const countryName = check_destination.country_name;
+        
+        // Buscar o país na API OMS com base no country_name do destino encontrado
+        const paisResponse = await axios.get(`http://localhost:8080/api/paises/nome/${countryName}`);
+
+        const pais = paisResponse.data;
+
+        // Extrair o campo cod_zonageo do país encontrado
+        const idZona = pais.cod_zonageo;
+
+        // Encontrar os surtos correspondentes ao cod_zonageo
+        const surtosResponse = await axios.get(`http://localhost:8080/api/surtos/zona/${idZona}`);
+
+        const surtos = surtosResponse.data;
+        
+        if(surtos.ativos===0){
+            return res.json({check_destination, message: 'Não há surtos ativos para este destino. É seguro viajar.' });
+        } else {
+            const codigopais = pais.cod_pais;
+
+            const recomendacoespais = await axios.get(`http://localhost:8080/api/paises/${codigopais}/recomendacoes`);
+
+            const resultado = recomendacoespais.data;
+
+            //ISto ainda tem de ser alterado porque validade de recomendação tem nr de dias
+            if(resultado.validade_nota != null){
+                res.json({message: 'Existem surtos ativos mas não existe nenhuma recomendação ativa. Erro!' });
+            }
+            return res.json({check_destination, message: 'Tenha atenção, existe um ou mais surto(s) ativo(s) para '+ check_destination.city_name + '.', resultado});
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erro durante o processamento." });
+    }
 }
 
 // GET destination by id

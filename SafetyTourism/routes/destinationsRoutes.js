@@ -33,14 +33,14 @@ router.post('/', celebrate({
 // GET all destinations
 router.get('/', destinationsController.getDestinations);
 
+// GET destination by ID
 router.get('/:_id', destinationsController.getDestinationById);
 
+// GET destination by name
 router.get('/city/:city_name', destinationsController.getDestinationByName);
 
 // PUT (OR PATCH) a destination by id
-
 // router.put('/:id', destinationsController.putDestination);
-
 router.put('/:city_name', destinationsController.updateDestination);
 
 

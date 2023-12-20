@@ -54,6 +54,20 @@ router.get('/', function (req, res) {
     });
 });
 
+// Get de um país específico por nome
+router.get('/nome/:nome_pais', async function(req,res) {
+    try{
+        const pais = await Paises.findOne({nome_pais: req.params.nome_pais});
+        if (!pais) {
+            return res.status(404).json({ message: 'O país com o nome ' + req.params.nome_pais + ' não existe!' });
+        }
+        res.json(pais);
+    }  
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erro no TRY!' });
+    }
+});
 
 // Get de um país específico
 router.get('/:cod_pais', async function(req,res) {
