@@ -148,6 +148,9 @@ router.get('/:cod_pais/surtos', async function (req, res) {
             objetos.push(surto);
         }
     }
+    permittedValues = array.map(function(value) {
+        return value.key;
+      });
     res.json(objetos);
     }
     catch (error) {

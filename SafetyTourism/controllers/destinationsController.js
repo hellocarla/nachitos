@@ -167,7 +167,6 @@ const deleteDestination = async function (req, res) {
             return res.status(404).json({message: "cidade não existe"});
         }
         const results = await Destinations.findByIdAndDelete(del_city._id);
-        // console.log("hello id " + _id)
         if (!results) {
             return res.json({message: "cidade já apagada ou nunca existiu"});
         }
