@@ -1,0 +1,89 @@
+[
+    {
+        "city_name": "Lisboa",
+        "city_desc": "Capital de Portugal",
+        "country_name": "Portugal"
+    },
+    {
+        "city_name": "Paris",
+        "city_desc": "Cidade do amor",
+        "country_name": "França"
+    },
+    {
+        "city_name": "Nova Iorque",
+        "city_desc": "A cidade que nunca dorme",
+        "country_name": "Estados Unidos"
+    },
+    {
+        "city_name": "Tóquio",
+        "city_desc": "Metrópole tecnológica",
+        "country_name": "Japão"
+    },
+    {
+        "city_name": "Rio de Janeiro",
+        "city_desc": "Cidade maravilhosa",
+        "country_name": "Brasil"
+    },
+    {
+        "city_name": "Bordéus",
+        "city_desc": "Cidade dos vinhos",
+        "country_name": "França"
+    },
+    {
+        "city_name": "Sydney",
+        "city_desc": "Cidade dos cangurus",
+        "country_name": "Austrália"
+    },
+    {
+        "city_name": "Cidade do México",
+        "city_desc": "Capital do México",
+        "country_name": "México"
+    },
+    {
+        "city_name": "Pequim",
+        "city_desc": "Capital da China",
+        "country_name": "China"
+    },
+    {
+        "city_name": "Roma",
+        "city_desc": "Cidade eterna",
+        "country_name": "Itália"
+    },
+    {
+        "city_name": "Cairo",
+        "city_desc": "Cidade dos faraós",
+        "country_name": "Egito"
+    },
+    {
+        "city_name": "Cidade do Cabo",
+        "city_desc": "No extremo sul da África",
+        "country_name": "África do Sul"
+    },
+    {
+        "city_name": "Seul",
+        "city_desc": "Capital da Coreia do Sul e K-Pop",
+        "country_name": "Coreia do Sul"
+    },
+    {
+        "city_name": "Londres",
+        "city_desc": "Tem o incrivel Big Ben e a London Eye",
+        "country_name": "Reino Unido"
+    },
+    {
+        "city_name": "Moscovo",
+        "city_desc": "Arquitetura incrivel",
+        "country_name": "Rússia"
+    },
+    {
+        "city_name": "Buenos Aires",
+        "city_desc": "Capital da Argentina",
+        "country_name": "Argentina"
+    },
+    {
+        "city_name": "Havana",
+        "city_desc": "Cidade histórica de Cuba",
+        "country_name": "Cuba"
+     }
+]
+    
+      

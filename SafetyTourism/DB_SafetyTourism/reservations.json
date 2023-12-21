@@ -1,0 +1,84 @@
+[
+    {
+        "res_clientId": "1",
+        "res_packageId": "Pacote Turístico em Lisboa"
+    },
+    {
+        "res_clientId": "2",
+        "res_packageId": "Pacote Romântico em Paris"
+    },
+    {
+        "res_clientId": "3",
+        "res_packageId": "Pacote de Aventuras em Nova Iorque"
+    },
+    {
+        "res_clientId": "4",
+        "res_packageId": "Pacote Tecnológico em Tóquio"
+    },
+    {
+        "res_clientId": "5",
+        "res_packageId": "Pacote de Praias no Rio de Janeiro"
+    },
+    {
+        "res_clientId": "6",
+        "res_packageId": "Pacote Histórico em Berlim"
+    },
+    {
+        "res_clientId": "7",
+        "res_packageId": "Pacote de Natureza em Sydney"
+    },
+    {
+        "res_clientId": "8",
+        "res_packageId": "Pacote Cultural na Cidade do México"
+    },
+    {
+        "res_clientId": "9",
+        "res_packageId": "Pacote de Exploração em Pequim"
+    },
+    {
+        "res_clientId": "10",
+        "res_packageId": "Pacote Romântico em Roma"
+    },
+    {
+        "res_clientId": "11",
+        "res_packageId": "Pacote Arqueológico no Cairo"
+    },
+    {
+        "res_clientId": "12",
+        "res_packageId": "Pacote Exótico em Mumbai"
+    },
+    {
+        "res_clientId": "13",
+        "res_packageId": "Pacote de Safári na Cidade do Cabo"
+    },
+    {
+        "res_clientId": "14",
+        "res_packageId": "Pacote Urbano em Toronto"
+    },
+    {
+        "res_clientId": "15",
+        "res_packageId": "Pacote Cultural em Seul"
+    },
+    {
+        "res_clientId": "16",
+        "res_package": "Pacote de Templos em Bangkok"
+    },
+    {
+        "res_clientId": "17",
+        "res_package": "Pacote Histórico em Londres"
+    },
+    {
+        "res_clientId": "18",
+        "res_packageId": "Pacote Russo em Moscou"
+    },
+    {
+        "res_clientId": "19",
+        "res_packageId": "Pacote de Tango em Buenos Aires"
+    },
+    {
+        "res_clientId": "20",
+        "res_packageId": "Pacote Histórico em Havana"
+    }
+]
+
+  

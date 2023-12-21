@@ -1,0 +1,114 @@
+[
+  {
+      "cityId": "Lisboa",
+      "pack_desc": "Pacote Turístico em Lisboa",
+      "pack_price": "300",
+      "pack_type": "Hotel"
+  },
+  {
+      "cityId": "Paris",
+      "pack_desc": "Pacote Romântico em Paris",
+      "pack_price": "1800",
+      "pack_type": "Hotel e Avião"
+  },
+  {
+      "cityId": "Nova Iorque",
+      "pack_desc": "Pacote de Aventuras em Nova Iorque",
+      "pack_price": "2500",
+      "pack_type": "Avião"
+  },
+  {
+      "cityId": "Tóquio",
+      "pack_desc": "Pacote Tecnológico em Tóquio",
+      "pack_price": "1799",
+      "pack_type": "Hotel e Avião"
+  },
+  {
+      "cityId": "Rio de Janeiro",
+      "pack_desc": "Pacote de Praias no Rio de Janeiro",
+      "pack_price": "600",
+      "pack_type": "Hotel"
+  },
+  {
+      "cityId": "Bordéus",
+      "pack_desc": "Pacote Histórico em Bordéus com provas de vinhos",
+      "pack_price": "1400",
+      "pack_type": "Avião"
+  },
+  {
+      "cityId": "Sydney",
+      "pack_desc": "Pacote de Natureza em Sydney",
+      "pack_price": "9000",
+      "pack_type": "Hotel"
+  },
+  {
+      "cityId": "Cidade do México",
+      "pack_desc": "Pacote Cultural na Cidade do México",
+      "pack_price": "1550",
+      "pack_type": "Hotel e Avião"
+  },
+  {
+      "cityId": "Pequim",
+      "pack_desc": "Pacote de Exploração em Pequim",
+      "pack_price": "1750",
+      "pack_type": "Avião"
+  },
+  {
+      "cityId": "Roma",
+      "pack_desc": "Pacote Romântico em Roma",
+      "pack_price": "1850",
+      "pack_type": "Hotel"
+  },
+  {
+      "cityId": "Cairo",
+      "pack_desc": "Pacote Arqueológico no Cairo",
+      "pack_price": "680",
+      "pack_type": "Avião"
+  },
+  {
+      "cityId": "Cidade do Cabo",
+      "pack_desc": "Pacote de Safári na Cidade do Cabo",
+      "pack_price": "1950",
+      "pack_type": "Hotel"
+  },
+  {
+      "cityId": "Toronto",
+      "pack_desc": "Pacote Urbano em Toronto",
+      "pack_price": "7000",
+      "pack_type": "Hotel e Avião"
+  },
+  {
+      "cityId": "Seul",
+      "pack_desc": "Pacote Cultural e gastronómico Seul",
+      "pack_price": "1600",
+      "pack_type": "Avião"
+  },
+  {
+      "cityId": "Londres",
+      "pack_descricao": "Pacote Histórico em Londres",
+      "pack_price": "1800",
+      "pack_type": "Hotel e Avião"
+  },
+  {
+      "cityId": "Moscovo",
+      "pack_desc": "Pacote arquitetónico em Moscovo",
+      "pack_price": "3900",
+      "pack_type": "Avião"
+  },
+  {
+      "cityId": "Buenos Aires",
+      "pack_desc": "Pacote de Tango em Buenos Aires",
+      "pack_price": "1700",
+      "pack_type": "Hotel"
+  },
+  {
+      "cityId": "Havana",
+      "pack_desc": "Pacote Histórico em Havana",
+      "pack_price": "1600",
+      "pack_type": "Hotel e Avião"
+    }
+  ]
+
+
+       
+  
