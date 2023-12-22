@@ -7,24 +7,52 @@ const { saveUser } = require('../models/usersSQL');
 
 
 //POST (&save) Users
-function postUsers(req, res) {
+const postUsers = async function (req, res) {
+    try{
+        user_name = req.body.user_name,
+        user_email = req.body.user_email,
+        user_pw = req.body.user_pw,
+        user_type = req.body.user_type,
+        user_NIF = req.body.user_NIF,
+        user_address = req.body.user_address,
+        user_phonenumber = req.body.user_phonenumber;
 
-    // var sqlUser = new UsersSql();
-    // const { user_name, user_email, user_pw } = req.body;
+        // save and check for errors
+        saveUser(user_name, user_email, user_pw, user_type, user_NIF, user_address, user_phonenumber, function (err) {
+            if(err){
+                res.json(err);
+            } else {
+                res.json({ message: 'user created in sql' });
+            }
+            res.json({ message: 'fim da função' });
+        });
+    } catch (error) {
+        console.error(error);
+        res.json({ message: "Não dá!"});
+    }
+};
+
+/*
+function postUsers(req, res) {
     user_name = req.body.user_name,
     user_email = req.body.user_email,
-    user_pw = req.body.user_pw;
+    user_pw = req.body.user_pw,
+    user_type = req.body.user_type,
+    user_NIF = req.body.user_NIF,
+    user_address = req.body.user_address,
+    user_phonenumber = req.body.user_phonenumber;
 
     // save and check for errors
-    saveUser(user_name, user_email, user_pw);
+    saveUser(user_name, user_email, user_pw, user_type, user_NIF, user_address, user_phonenumber);
     
     /*sqlUser.save(function (err) {
         if (err)
             res.send(err);
     });
-    */
+    
     res.json({ message: 'user created in sql' });
 };
+*/
 
 //GET all Users
 function getUsers(req, res) {

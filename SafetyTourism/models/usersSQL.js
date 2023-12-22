@@ -4,18 +4,8 @@ const bcrypt = require('bcrypt');
 
 // INITIALIZE SQLite database connection
 const db = new sqlite3.Database('./userDB.db');
-
 // USER SCHEMA
-/*const UsersqlSchema = {
-    // userId: { type: String, required:true, unique: true },        // if SQL, then starting at xxxx and incrementing automatically (PRIMARY KEY, NOTNULL, AUTOINCREMENT)
-    // { autoincrement: true}
-    // confirmar como começar o campo do id para prevenir SQL injection
-    //user_id: { type: Number, },
-    user_name: { type: String, required: true },
-    user_pw: { type: String, required: true },
-    user_email: { type: String, required: true, unique: true }
-};
-*/
+
 
 // create a function to hash the passwords
 const hashPassword = async (user_pw) => {
@@ -26,10 +16,14 @@ const hashPassword = async (user_pw) => {
 // save user with hashed password
 const saveUser = async (user_name,
                         user_email,
-                        user_pw) => {
+                        user_pw,
+                        user_type, 
+                        user_NIF, 
+                        user_address, 
+                        user_phonenumber) => {
    const hashedPassword = await hashPassword(user_pw);
-    db.run(`INSERT INTO users (user_name, user_email, user_pw) VALUES (?,?,?)`,
-                                [user_name, user_email, hashedPassword]);
+    db.run(`INSERT INTO users (user_name, user_email, user_pw, user_type, user_NIF, user_address, user_phonenumber) VALUES (?,?,?,?,?,?,?)`,
+                                [user_name, user_email, hashedPassword, user_type, user_NIF, user_address, user_phonenumber]);
                         };
 
 
