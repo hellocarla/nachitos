@@ -55,6 +55,9 @@ app.use('/api/country', countryRoutes);
 var RegUserRoutes = require('./routes/RegUserRoutes');
 app.use('/api/sql', RegUserRoutes);
 
+var loginRoutes = require('./routes/loginRoutes');
+app.use('/api/login', loginRoutes);
+
 //Server
 app.listen(8090, () => {
     console.log("This bitch be running like " + port + " hogs");
