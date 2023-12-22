@@ -13,7 +13,7 @@ var RecomendacoesSchema = new Schema({
     cod_surto: {type: Schema.Types.ObjectId, ref: 'surtos'},    //FK para ligar as recomendações às surtos
     cod_zonageo: {type: Schema.Types.ObjectId, ref: 'zona'},    //FK para ligar as recomendações às zonas
     data_nota: {type: Date, required: true},    
-    validade_nota: {type: Number, default:null, validate: [validarNumeroPositivo, 'A validade da nota deve ser maior ou igual a 1 dia']},      
+    validade_nota: {type: Number, required:true, default:0, validate: [validarNumeroPositivo, 'A validade da nota deve ser maior ou igual a 1 dia']},      
     recomendacao_texto: {type: String, required:true}  
 });
 module.exports = mongoose.model('recomendacoes', RecomendacoesSchema);
