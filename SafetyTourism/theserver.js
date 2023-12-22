@@ -31,7 +31,7 @@ const db = new sqlite3.Database('./userDB.db', sqlite3.OPEN_READWRITE,(err) => {
 
 // CREATE database
         // this should run ONLY once, like Michelle
- var sqlCreate = `CREATE TABLE IF NOT EXISTS users(user_name, user_email, user_pw)`;
+ var sqlCreate = `CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT, user_name, user_email, user_pw)`;
      db.run(sqlCreate);
      console.log("tabela criada");
 

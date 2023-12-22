@@ -4,23 +4,24 @@
 
 // IMPORTS
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+//const sqlite3 = require('sqlite3').verbose();
 // IMPORTS FROM USERS IN SQL
-const UsersSql = require('../models/usersSQL');
+//const UsersSql = require('../models/usersSQL');
 const userSqlController = require('../controllers/userSqlController');
-
-
-// const Users = require('../models/usersSQL');
 const router = express.Router();
-
-// CONNECT TO DATABASE
-const db = new sqlite3.Database('userDB.db');
 
 //POST a user
 router.post('/', userSqlController.postUsers);
 
 //GET all Users
 router.get('/', userSqlController.getUsers);
+
+//GET user by ID
+router.get('/user/:id',userSqlController.getUsersbyId);
+
+// UPDATE (patch) a user
+router.put('/:id',userSqlController.updateUsers);
+
 /*
 //como se integra?
 function  checkEmail(user_email) {
@@ -38,7 +39,7 @@ function  checkEmail(user_email) {
 */
 // GET a specified user
 
-// UPDATE (patch) a user
+
 
 // DELETE a user
 
