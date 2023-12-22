@@ -70,24 +70,9 @@ function updateUsers(req, res) {
         res.json({ message: "UPDATE bem sucedido!" });
     });
 };
-/*function updateUsers(req, res) {
-    const id = req.params.id; 
-    const nome = req.body.user_name;
-    db.run(`UPDATE users SET user_name = ? WHERE id = ?`, [nome, id], (error, row) => {
-        console.log(id + nome + "variável");
-        if (error) {
-            console.error(error.message);
-            return res.status(500).json({ error: 'Internal server error' });
-        }
-        if (!row) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-        user_name= req.body.user_name;
-        //user_name.save();
-        res.json({ message: "UPDATE bem sucedido!" });
-    });
-};
-*/
+
+//DELETE
+
 
 // DROP table
 //db.run("DROP TABLE users");   // or we can use a query & call it in a function
