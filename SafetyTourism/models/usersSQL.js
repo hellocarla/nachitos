@@ -4,8 +4,6 @@ const bcrypt = require('bcrypt');
 
 // INITIALIZE SQLite database connection
 const db = new sqlite3.Database('./userDB.db');
-// USER SCHEMA
-
 
 // create a function to hash the passwords
 const hashPassword = async (user_pw) => {

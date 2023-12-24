@@ -26,9 +26,6 @@ const getCountries = function (req, res) {
             cod_pais: element.cod_pais,
             nome_pais: element.nome_pais
         }));
-
-        console.log(countries);
-
         res.json(countries);
 });
 };

@@ -14,6 +14,7 @@ countryController.getCountries({}, {
     }
 });
 
+
 const postDestinations = async function (req, res) {
     try {
         if (!listaPaises) {

@@ -40,7 +40,6 @@ const db = new sqlite3.Database('./userDB.db', sqlite3.OPEN_READWRITE,(err) => {
                 user_address TEXT DEFAULT NULL, 
                 user_phonenumber INTEGER DEFAULT NULL)`;
      db.run(sqlCreate);
-     console.log("tabela criada");
 
 
 // API routes go here...
