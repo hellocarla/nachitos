@@ -95,7 +95,7 @@ const getDestinationByName = async function (req, res) {
         
         const countryName = check_destination.country_name;
         
-        // Buscar o país na API OMS com base no country_name do destino encontrado
+        // Vai buscar o país na API OMS com base no country_name do destino encontrado
         const paisResponse = await axios.get(`http://localhost:8080/api/paises/nome/${countryName}`);
 
         const pais = paisResponse.data;
