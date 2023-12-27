@@ -28,10 +28,11 @@ const getPackagesByName = async function (req, res) {
     try {
         const new_dest = await Destinations.findOne({city_name: req.params.city}).exec();
         if(!new_dest) {
-            return res.json({message: "Cidade não encontrada."});
+            return res.json({ message: "Cidade não encontrada."});
         }
         
-        var check_packages = await Packages.find({city: new_dest._id}).exec();
+        var check_packages = await Packages.find({cityId: new_dest._id}).exec();
+        console.log(check_packages);
         if(check_packages == []) {
             return res.status(404).json({ message: "Não existem pacotes para este destino."});
     }
