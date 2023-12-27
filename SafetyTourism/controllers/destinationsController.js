@@ -83,16 +83,19 @@ const getDestinationByName = async function (req,res) {
 // GET specific destination by name
 const getDestinationByName = async function (req, res) {
     try {
+        let recomendacoes = [];
+        let mensagem = '';
+
         // Encontrar o destino pelo city_name
         const check_destination = await Destinations.findOne({ city_name:req.params.city_name}).exec();
-        
+
         if (!check_destination) {
             return res.status(404).json({ message: "Cidade não encontrada!" });
         }
         
         const countryName = check_destination.country_name;
         
-        // Buscar o país na API OMS com base no country_name do destino encontrado
+        // Vai buscar o país na API OMS com base no country_name do destino encontrado
         const paisResponse = await axios.get(`http://localhost:8080/api/paises/nome/${countryName}`);
 
         const pais = paisResponse.data;
@@ -104,23 +107,30 @@ const getDestinationByName = async function (req, res) {
         const surtosResponse = await axios.get(`http://localhost:8080/api/surtos/zona/${idZona}`);
 
         const surtos = surtosResponse.data;
-        
-        if(surtos.ativos===0){
-            return res.json({check_destination, message: 'Não há surtos ativos para este destino. É seguro viajar.' });
+
+        if(surtos.ativos===0){ 
+            mensagem = 'Não há surtos ativos para este destino. É seguro viajar.';
+            //res.json({check_destination, message: 'Não há surtos ativos para este destino. É seguro viajar.' });
         } else {
-            const codigopais = pais.cod_pais;
+            mensagem = 'Tenha atenção, existe um ou mais surto(s) ativo(s) para ' + check_destination.city_name + '.';
+        }
+            const codigopais = pais.cod_pais; 
 
             const recomendacoespais = await axios.get(`http://localhost:8080/api/paises/${codigopais}/recomendacoes`);
 
-            const resultado = recomendacoespais.data;
+            recomendacoes = recomendacoespais.data;
 
-            //ISto ainda tem de ser alterado porque validade de recomendação tem nr de dias
-            if(resultado.validade_nota != null){
-                res.json({message: 'Existem surtos ativos mas não existe nenhuma recomendação ativa. Erro!' });
-            }
-            return res.json({check_destination, message: 'Tenha atenção, existe um ou mais surto(s) ativo(s) para '+ check_destination.city_name + '.', resultado});
+            if(recomendacoes.validade_nota == 0){
+                mensagem = 'Existem surtos ativos, mas não existe nenhuma recomendação ativa. Erro!';
+              //res.json({ message: 'Existem surtos ativos, mas não existe nenhuma recomendação ativa. Erro!' });
+            } 
+
+            const packages_data = await axios.get(`http://localhost:8090/api/packages/city/${req.params.city_name}`);
+            const packages = packages_data.data;
+
+            return res.json({ 
+                message: mensagem, recomendacoes, packages});
         }
-    }
     catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erro durante o processamento." });
@@ -128,7 +138,6 @@ const getDestinationByName = async function (req, res) {
 }
 
 // GET destination by id
-
 const getDestinationById = function (req, res) {
     Destinations.findById(req.params._id, function (err, destination) {
         if (err)
