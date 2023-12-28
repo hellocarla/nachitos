@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 const DestinationsSchema = new Schema({
     id: Schema.Types.ObjectId,
     city_name: String,      // name of city
-    city_desc: String,      // brief description of city
+    city_desc: String,      // brief description of city, ideally between 20 and 280 characters (not words!)
     country_name: String    // country it belongs to (make it grab from database)
 });
 

@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-const PackagesSchema = new mongoose.Schema({        // <-- why is it like this in the teacher's example?
+const PackagesSchema = new mongoose.Schema({
     id: Schema.Types.ObjectId,
     city: {type: Schema.Types.ObjectId, ref: 'destinations'},    
     pack_desc: String,      // brief description of package
