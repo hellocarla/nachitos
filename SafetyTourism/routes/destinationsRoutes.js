@@ -10,13 +10,6 @@ var router = express.Router();
 var APIligacao = require('node-rest-client').Client;
 var APIaddress = "http://localhost:8080/api/paises";
 
-
-// POST new destination
-//Router.post('/', destinationsController.postDestinations);      //controllerName.functionName
-// THIS -----------------^ is a POINTER to a function, not the function itself
-// this allows express to execute the function for us when a request reaches this route
-
-
 // POST WITH JOI (YAY)
 router.post('/', celebrate({
             body: Joi.object({

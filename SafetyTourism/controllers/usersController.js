@@ -1,4 +1,4 @@
-// IMPORTS
+//IMPORTS
 const Users = require('../models/users');
 
 // POST A USER (register)
