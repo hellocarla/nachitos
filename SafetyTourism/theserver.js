@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 // PORT
-var port = process.env.port || 8090;        // <-- let's change ports to a common unnocupied one so we don't keep changing (api 1 as well)
+var port = process.env.port || 8090;       
 
 
 
@@ -24,25 +24,24 @@ const sqlite3 = require('sqlite3').verbose();
 
 
 // CONNECT to database
-const db = new sqlite3.Database('./userDB.db', sqlite3.OPEN_READWRITE,(err) => {
+const db = new sqlite3.Database('./userDB.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,(err) => {
     if(err)
         return console.error(err.message);      // catching an error
 });
 
 // CREATE database
-        // this should run ONLY once, like Michelle
  var sqlCreate = `CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                user_name TEXT, 
-                user_email TEXT UNIQUE NOT NULL, 
-                user_pw TEXT, 
-                user_type TEXT CHECK(user_type IN ('client', 'admin', 'func')), 
-                user_NIF INTEGER DEFAULT NULL, 
+                user_name TEXT UNIQUE NOT NULL, 
+                user_email TEXT UNIQUE NOT NULL,
+                user_pw TEXT NOT NULL, 
+                user_type TEXT CHECK(user_type IN ('client', 'admin', 'func')) DEFAULT 'client', 
+                user_NIF INTEGER UNIQUE DEFAULT NULL, 
                 user_address TEXT DEFAULT NULL, 
                 user_phonenumber INTEGER DEFAULT NULL)`;
      db.run(sqlCreate);
 
 
-// API routes go here...
+// API routes go here
 var destinosRoutes = require('./routes/destinationsRoutes');
 app.use('/api/destinations', destinosRoutes);
 
