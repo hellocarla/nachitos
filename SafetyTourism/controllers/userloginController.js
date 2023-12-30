@@ -12,13 +12,11 @@ const keyFile = require('../secret.key');
 //POST user
 function postloginUsers(req, res) {
     const { user_name, user_pw } = req.body;
-    console.log(req.body);
     // Authenticate user
     fetchUserByUsername(user_name)
     .then((user) => {
         if (user) {
             const hashedPasswordFromDB = user.user_pw; // Assuming 'password' is the column name in the database
-            console.log(user.user_pw);
             comparePasswords(user_pw, hashedPasswordFromDB)
             .then((passwordsMatch) => {
                 if (passwordsMatch) { //igual a if(passwordMatch==true)

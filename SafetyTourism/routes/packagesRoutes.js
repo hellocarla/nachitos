@@ -6,6 +6,9 @@ const { celebrate, Joi } = require('celebrate');
 // IMPORT the controller
 const packagesController = require('../controllers/packagesController');
 var router = express.Router();
+const admin_funcionarioTokenValidation = require('../middleware/Auth_admin_func');
+const adminTokenValidation = require('../middleware/Auth_admin');
+const TokenValidation = require('../middleware/Auth_geral');
 
 // POST WITH JOI (YAY)
 router.post('/', celebrate({
@@ -16,14 +19,15 @@ router.post('/', celebrate({
         pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião').required()
     })
 }),
+admin_funcionarioTokenValidation,
 packagesController.postPackages
 );
 
-router.get('/', packagesController.getPackages);
+router.get('/', admin_funcionarioTokenValidation, packagesController.getPackages);
 
-router.get('/:id', packagesController.getPackagesById);
+router.get('/:id', admin_funcionarioTokenValidation, packagesController.getPackagesById);
 
-router.get('/city/:city', packagesController.getPackagesByName);
+router.get('/city/:city', TokenValidation, packagesController.getPackagesByName);
 
 //router.put('/:id', packagesController.updatePackages);
 router.put(
@@ -36,10 +40,11 @@ router.put(
         pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião')
       })
     }),
+    admin_funcionarioTokenValidation,
     packagesController.updatePackages
   );
 
-router.delete('/:id', packagesController.deletePackages);
+router.delete('/:id', adminTokenValidation, packagesController.deletePackages);
 
 
 // EXPORT the router so we can import it in the server

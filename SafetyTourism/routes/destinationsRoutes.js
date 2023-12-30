@@ -3,9 +3,14 @@
 // IMPORT requirements
 const express = require('express');
 const { celebrate, Joi } = require('celebrate');
-// IMPORT the controller
 const destinationsController = require('../controllers/destinationsController');
 var router = express.Router();
+const admin_funcionarioTokenValidation = require('../middleware/Auth_admin_func');
+const adminTokenValidation = require('../middleware/Auth_admin');
+const TokenValidation = require('../middleware/Auth_geral');
+
+
+
 // Ligação à API OMS
 var APIligacao = require('node-rest-client').Client;
 var APIaddress = "http://localhost:8080/api/paises";
@@ -24,24 +29,21 @@ router.post('/', celebrate({
 
 
 // GET all destinations
-router.get('/', destinationsController.getDestinations);
+router.get('/', TokenValidation, destinationsController.getDestinations);
 
 // GET destination by ID
-router.get('/:_id', destinationsController.getDestinationById);
+router.get('/:_id', admin_funcionarioTokenValidation, destinationsController.getDestinationById);
 
 // GET destination by name
-router.get('/city/:city_name', destinationsController.getDestinationByName);
+router.get('/city/:city_name', TokenValidation, destinationsController.getDestinationByName);
 
 // PUT (OR PATCH) a destination by id
 // router.put('/:id', destinationsController.putDestination);
-router.put('/:city_name', destinationsController.updateDestination);
+router.put('/:city_name', admin_funcionarioTokenValidation, destinationsController.updateDestination);
 
-
-// DELETE a destination by id
-    //just for testing!!! global warming hasn't erradicated any cities yet
 
 // router.delete('/:city_name', destinationsController.deleteNameDestination);
-router.delete('/:city_name', destinationsController.deleteDestination);
+router.delete('/:city_name', adminTokenValidation, destinationsController.deleteDestination);
 
 // EXPORT the router so we can import it in the server
 module.exports = router;

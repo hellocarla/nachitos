@@ -84,7 +84,7 @@ const getReservations = function (req,res) {
     });
 };
 
-// GET reservation by ID 
+//GET reservation by ID 
 const getReservationById = async function (req, res) {
     try{
         const check_getResId = await Reservations.findById(req.params._id).exec();
@@ -103,7 +103,7 @@ const getReservationById = async function (req, res) {
 // GET reservation by client ID 
 const getReservationByClient = async function (req,res) {
     try {
-        const check_client = await Reservations.find({res_client: req.params.res_client}).exec();
+        const check_client = await Reservations.find({res_client: req.user.userid}).exec();
         if(!check_client) {
             return res.status(404).json({message: "Cliente não existe!"})
         }
@@ -115,6 +115,21 @@ const getReservationByClient = async function (req,res) {
     }
 };
 
+
+/*const getReservationByClient = async function (req,res) {
+    try {
+        const check_client = await Reservations.find({res_client: req.params.res_client}).exec();
+        if(!check_client) {
+            return res.status(404).json({message: "Cliente não existe!"})
+        }
+        res.json(check_client);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({message: "erro durante o try"});
+    }
+};
+*/
 
 // UPDATE reservation by ID
 const updateReservationById = async function (req,res) {
