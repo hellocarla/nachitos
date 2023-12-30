@@ -2,12 +2,13 @@
 const express = require('express');
 const userSqlController = require('../controllers/userSqlController');
 const router = express.Router();
+const clientvalidateToken = require('../controllers/middlewareController');
 
 //POST a user
 router.post('/', userSqlController.postUsers);
 
 //GET all Users
-router.get('/', userSqlController.getUsers);
+router.get('/', clientvalidateToken, userSqlController.getUsers);
 
 //GET user by ID
 router.get('/user/:id',userSqlController.getUsersbyId);

@@ -63,6 +63,12 @@ app.use('/api/sql', RegUserRoutes);
 var loginRoutes = require('./routes/loginRoutes');
 app.use('/api/login', loginRoutes);
 
+/*
+//adicionei agora
+var middlewareRoutes = require('./routes/middlewareRoutes');
+app.use('api/auth', middlewareRoutes);
+*/
+
 //Server
 app.listen(8090, () => {
     console.log("This bitch be running like " + port + " hogs");

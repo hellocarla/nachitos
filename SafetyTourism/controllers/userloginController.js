@@ -11,10 +11,10 @@ const keyFile = require('../secret.key');
 
 //POST user
 function postloginUsers(req, res) {
-    const { id, user_pw } = req.body;
+    const { user_name, user_pw } = req.body;
     console.log(req.body);
     // Authenticate user
-    fetchUserByUsername(id)
+    fetchUserByUsername(user_name)
     .then((user) => {
         if (user) {
             const hashedPasswordFromDB = user.user_pw; // Assuming 'password' is the column name in the database
@@ -24,17 +24,14 @@ function postloginUsers(req, res) {
                 if (passwordsMatch) { //igual a if(passwordMatch==true)
                     // If authentication succeeds, generate JWT token
                     const authData = { 
-                        username: user.id,
-                        //userRole: user.type 
+                        userid: user.id,
+                        username: user.user_name,
+                        userRole: user.user_type
                     };
 
                     const token = jwt.sign(authData, keyFile.securekey , { expiresIn: '1h' });
 
-                    res.send({ 
-                        username: user.id,
-                        //userRole: user.type,
-                        userToken: token 
-                    });
+                    res.status(200).json({ userToken: token });
                 } else {
                     res.send('Incorrect password');
                 }
@@ -51,13 +48,13 @@ function postloginUsers(req, res) {
         console.log(error);
     });
 }
-// .finally é uma opção que posso adicionar, irá ser sempre executada no fim de ter sido feito .catch/.then. 
+
 
 
 // Function to fetch user by username
-const fetchUserByUsername = (id) => {
+const fetchUserByUsername = (user_name) => {
     return new Promise((resolve, reject) => {
-        db.get('SELECT * FROM users WHERE id = ?', [id], (err, row) => {
+        db.get('SELECT * FROM users WHERE user_name LIKE ?', [user_name], (err, row) => {
             if (err) {
                 reject(err); //Erros de sintaxe na query, servidor desligado
             } else {
