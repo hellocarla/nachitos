@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: whitesmoke;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-left: 25px;
+    font-weight: bold;
+    color: cadetblue;
+}
+
+nav {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+}
+
+a {
+    margin: auto;
+    color: black;
+}
+
+button {
+    margin: 10px 10px 10px 10px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+TRY LATER
+
+.btn:hover {
+    transition-duration: 2s;
+}
+*/
+
+#chillis {
+    font-size: 100px;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 200px;
+}

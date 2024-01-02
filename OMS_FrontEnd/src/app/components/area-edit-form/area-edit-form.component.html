@@ -1,0 +1,9 @@
+<form [formGroup]="areaEditForm" (ngSubmit)="onSave()">
+    <label for="nome_zonageo">Edit the name:</label>
+    <input type="text" id="nome_zonageo" formControlName="nome_zonageo">
+    <br>
+    <label for="cod_zonageo">Edit the code:</label>
+    <input type="text" id="cod_zonageo" formControlName="cod_zonageo">
+    <br><br>
+    <button type="submit" class="btn btn-success">Update area</button>
+</form>
