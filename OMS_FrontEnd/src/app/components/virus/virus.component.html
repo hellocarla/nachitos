@@ -1,0 +1,19 @@
+<h2>os Virus</h2>
+
+<ul class="virus">
+    <li *ngFor="let virus of viruses">
+        <button type="button" class="btn btn-outline-dark" (click)="onSelect(virus)">
+            <span class="nome_virus">{{virus.nome_virus}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-virus-details [selectedVirus]="selectedVirus"></app-virus-details>
+
+<app-virus-edit-form (virusEdited)="onVirusEdited($event)" *ngIf="
+        selectedVirus" [virus]="selectedVirus"></app-virus-edit-form>
+
+<app-delete-virus-form (virusDeleted)="onVirusDeleted($event)" *ngIf="
+        selectedVirus" [virus]="selectedVirus"></app-delete-virus-form>
+
+<app-virus-form (virusCreated)="onVirusCreated($event)"></app-virus-form>

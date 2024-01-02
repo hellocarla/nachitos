@@ -1,0 +1,13 @@
+<h2>Insert new Virus</h2>
+<br>
+<form [formGroup]="virusForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="nome_virus">Name:</label>
+        <input type="text" id="nome_virus" placeholder="Cool Guy Syndrome" formControlName="nome_virus">
+        <br>
+        <label for="cod_virus">Code:</label>
+        <input type="text" id="cod_virus" placeholder="V00#" formControlName="cod_virus">
+    </div>
+    <br>
+    <button type="submit" [disabled]="!virusForm.valid" class="btn btn-success">Inject Virus</button>
+</form>
