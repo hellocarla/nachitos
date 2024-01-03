@@ -1,0 +1,18 @@
+<div *ngIf="selectedRec">
+    <h2>{{selectedRec.cod_recomendacao}} WARNING</h2>
+    <br>
+    <div><b>ZONA:</b>
+    <app-area-details [selectedArea]="selectedRec.cod_zonageo">
+    </app-area-details></div>
+    <br>
+    <div><b>SURTO:</b>
+    <app-surto-details [selectedSurto]="selectedRec.cod_surto">
+    </app-surto-details></div>
+    <br>
+    <div><b>RECOMENDAÇÃO:</b>{{selectedRec.recomendacao_texto}}</div>
+    <br>
+    <div><b>Desde:</b>{{selectedRec.data_nota}}</div>
+    <br>
+    <div><b>Duração:</b>{{selectedRec.validade_nota}}</div>
+
+</div>

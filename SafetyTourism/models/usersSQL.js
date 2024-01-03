@@ -7,7 +7,7 @@ const db = new sqlite3.Database('./userDB.db');
 
 // create a function to hash the passwords
 const hashPassword = async (user_pw) => {
-    const saltRounds = 5;
+    const saltRounds = 10;
     return await bcrypt.hash(user_pw,saltRounds);
 };
 
@@ -19,14 +19,20 @@ const saveUser = async (user_name,
                         user_NIF, 
                         user_address, 
                         user_phonenumber) => {
-   const hashedPassword = await hashPassword(user_pw);
-   console.log("saveuser");
-    db.run(`INSERT INTO users (user_name, user_email, user_pw, user_type, user_NIF, user_address, user_phonenumber) VALUES (?,?,?,?,?,?,?)`,
-                                [user_name, user_email, hashedPassword, user_type, user_NIF, user_address, user_phonenumber]);
-                        };
+    const hashedPassword = await hashPassword(user_pw);
+    return new Promise((resolve,reject) => {
+        db.run(`INSERT INTO users (user_name, user_email, user_pw, user_type, user_NIF, user_address, user_phonenumber) VALUES (?,?,?,?,?,?,?)`,
+        [user_name, user_email, hashedPassword, user_type, user_NIF, user_address, user_phonenumber], 
+        (err,row) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(row); // Resolve with user data (if found)
+            }
+        });
+    });
+};
 
-
-//UsersqlSchema,
 
 // EXPORTS
 module.exports = {

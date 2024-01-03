@@ -16,5 +16,6 @@ router.get('/user/:id',userSqlController.getUsersbyId);
 router.put('/:id',userSqlController.updateUsers);
 
 // DELETE a user
+router.delete('/:id',userSqlController.deleteUsers);
 
 module.exports = router;

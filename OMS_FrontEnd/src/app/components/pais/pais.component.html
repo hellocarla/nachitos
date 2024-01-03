@@ -1,0 +1,13 @@
+<h2>Países</h2>
+
+<ul class="paises">
+    <li *ngFor="let pais of paises">
+        <button type="button" class="btn btn-outline-dark" (click)="onSelect(pais)">
+            <span class="nome_pais">{{pais.nome_pais}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-pais-details [selectedPais]="selectedPais"></app-pais-details>
+
+<app-pais-form (paisCreated)="onPaisCreated($event)"></app-pais-form>
