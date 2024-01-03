@@ -44,6 +44,7 @@ router.post('/', async function (req, res) {
 
 
 // Obter/Pesquisar todos os países (accessed at GET http://localhost:8082/api/paises)
+/*
 router.get('/', function (req, res) {
     Paises.find(function (err, paises) {
         if (err){
@@ -52,6 +53,34 @@ router.get('/', function (req, res) {
              res.json(paises);
         }
     });
+});
+*/
+
+// GET ALL de países com objecto ZONA
+router.get('/', async function (req, res) {
+    try {                                               
+        const paises = await Paises.find().exec();       
+        if (paises) {                                    
+            var todos_paises = [];                          
+            for (const pais of paises) {                 
+                const zona_mae = await Zona.findById(pais.cod_zonageo).exec();   
+                if (zona_mae) {                             
+                    var pais_novo = new Object();  					
+					pais_novo._id = pais._id;
+                    pais_novo.nome_pais = pais.nome_pais;
+                    pais_novo.cod_pais = pais.cod_pais;
+                    pais_novo.cod_zonageo = zona_mae;                  
+                    todos_paises.push(pais_novo);                
+                }
+            }
+
+            res.json(todos_paises);               
+
+        }
+
+    } catch (err) {
+        res.send(err);
+    }
 });
 
 

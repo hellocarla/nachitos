@@ -50,13 +50,43 @@ router.post('/', async function (req, res) {
 
 
 // GET de todos os surtos http://localhost:8082/api/surtos
-router.get('/', function(_req,res) {
+router.get('/all', function(_req,res) {
     Surtos.find(function(err, surtos) {
         if(err)
             res.send(err);
 
         res.json(surtos);
     });
+});
+
+// GET ALL de surtos com objecto ZONA e VIRUS
+router.get('/', async function (req, res) {
+    try {                                               
+        const surtos = await Surtos.find().exec();       
+        if (surtos) {                                    
+            var todos_surtos = [];                          
+            for (const surto of surtos) {                 
+                const zona_mae = await Zona.findById(surto.cod_zonageo).exec();
+                const virus_pai = await Virus.findById(surto.cod_virus).exec();   
+                if (zona_mae && virus_pai) {                             
+                    var surto_novo = new Object();  					
+					surto_novo._id = surto._id;
+                    surto_novo.cod_surto = surto.cod_surto;
+                    surto_novo.cod_zonageo = zona_mae;
+                    surto_novo.cod_virus = virus_pai;
+                    surto_novo.data_inicio = surto.data_inicio;
+                    surto_novo.data_fim = surto.data_fim;                  
+                    todos_surtos.push(surto_novo);                
+                }
+            }
+
+            res.json(todos_surtos);               
+
+        }
+
+    } catch (err) {
+        res.send(err);
+    }
 });
 
 
