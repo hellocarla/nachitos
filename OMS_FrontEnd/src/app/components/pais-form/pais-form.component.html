@@ -1,0 +1,20 @@
+<h2>Add new country</h2>
+<form [formGroup]="paisForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="nome_pais">Nome:</label>
+        <input type="text" id="nome_pais" formControlName="nome_pais" placeholder="Portugal">
+        <br>
+        <label for="cod_pais">Code:</label>
+        <input type="text" id="cod_pais" formControlName="cod_pais" placeholder="PT">
+        <br>
+        <label for="cod_zonageo">Zona:</label>
+        <select id="cod_zonageo" formControlName="cod_zonageo">
+            <option *ngFor="let area of possibleAreas" value="{{area.cod_zonageo}}">
+            {{area.nome_zonageo}} || {{area.cod_zonageo}}
+            </option>
+        </select>
+    </div>
+    
+    <button type="submit" [disabled]="!paisForm.valid" class="btn btn-success">Create new country</button>
+
+</form>

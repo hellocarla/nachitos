@@ -1,0 +1,13 @@
+<h2>OUTBReaks</h2>
+
+<ul class="surto">
+    <li *ngFor="let surto of surtos">
+        <button type="button" class=" btn btn-outline-dark" (click)="onSelect(surto)">
+            <span class="cod_surto">{{surto.cod_surto}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-surto-details [selectedSurto]="selectedSurto"></app-surto-details>
+
+<app-surto-form (surtoCreated)="onSurtoCreated($event)"></app-surto-form>

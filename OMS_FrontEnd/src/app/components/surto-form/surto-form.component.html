@@ -1,0 +1,30 @@
+<h2>create a new outbreak</h2>
+<br>
+<form [formGroup]="surtoForm" (ngSubmit)="onSubmit()">
+<div>
+    <label for="cod_surto">Outbreak Code:</label>
+    <input type="text" id="cod_surto" formControlName="cod_surto">
+    <br>
+    <label for="cod_zonageo">Code zona:</label>
+    <select id="cod_zonageo" formControlName="cod_zonageo">
+        <option *ngFor="let area of possibleAreas" value="{{area.cod_zonageo}}">
+        {{area.nome_zonageo}}
+        </option>
+    </select>
+    <br>
+    <label for="cod_virus">Code virus:</label>
+    <select id="cod_virus" formControlName="cod_virus">
+        <option *ngFor="let virus of possibleVirus" value="{{virus.cod_virus}}">
+        {{virus.nome_virus}}
+    </option>
+    </select>
+    <br>
+    <label for="data_inicio">Begun on:</label>
+    <input type="date" id="data_inicio" formControlName="data_inicio">
+    <br>
+    <label for="data_fim">Ended:</label>
+    <input type="date" id="data_fim" formControlName="data_fim">
+    <br>
+</div>
+<button type="submit" class="btn btn-success" [disabled]="!surtoForm.valid">Create outbreak</button>
+</form>

@@ -1,0 +1,19 @@
+<h2>ZONAS GEOGRÁFICAS</h2>
+
+<ul class="area">
+    <li *ngFor="let area of areas">
+        <button type="button" class="btn btn-outline-dark" (click)="onSelect(area)">
+            <span class="nome_zonageo">{{area.nome_zonageo}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-area-details [selectedArea]="selectedArea"></app-area-details>
+
+<app-area-edit-form (areaEdited)="onAreaEdited($event)" *ngIf="
+        selectedArea" [area]="selectedArea"></app-area-edit-form>
+
+<app-area-delete-form (areaDeleted)="onAreaDeleted($event)" *ngIf="
+        selectedArea" [area]="selectedArea"></app-area-delete-form>
+
+<app-area-form (areaCreated)="onAreaCreated($event)"></app-area-form>

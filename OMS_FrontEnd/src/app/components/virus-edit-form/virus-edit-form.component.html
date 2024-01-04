@@ -1,0 +1,9 @@
+<form [formGroup]="virusEditForm" (ngSubmit)="onSave()">
+    <label for="virusName">Update Virus Name:</label>
+    <input type="text" id="virusName" formControlName="nome_virus" placeholder="new name"/>
+<br>
+    <label for="virusCode">Update Virus Code:</label>
+    <input type="text" id="virusCode" formControlName="cod_virus" placeholder="new code"/>
+<br><br>
+    <button type="submit" class="btn btn-success">Update!</button>
+</form>
