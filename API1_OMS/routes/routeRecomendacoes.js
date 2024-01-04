@@ -52,13 +52,43 @@ try{
 });
 
 // Get de todas as recomendações ( http://localhost:8082/api/recomendacoes )
-router.get('/',function(_req, res) {
+router.get('/all',function(_req, res) {
     Recomendacoes.find(function(err, recomendacoes) {
         if (err)
             res.send(err);
 
             res.json(recomendacoes);
         });
+    });
+
+
+// GET de todas as recs com objecto ZONA e SURTO
+    router.get('/', async function (req,res) {
+        try {
+            const recs = await Recomendacoes.find().exec();
+            if(recs) {
+                var todas_recs = [];
+                for (const rec of recs) {
+                    const zona_mae = await Zona.findById(rec.cod_zonageo).exec();
+                    const surto_pai = await Surtos.findById(rec.cod_surto).exec(); 
+                    if(zona_mae && surto_pai) {
+                        var rec_nova = new Object();
+                        rec_nova._id = rec._id;
+                        rec_nova.cod_recomendacao = rec.cod_recomendacao;
+                        rec_nova.validade_nota = rec.validade_nota;
+                        rec_nova.cod_zonageo = zona_mae;
+                        rec_nova.cod_surto = surto_pai;
+                        rec_nova.data_nota = rec.data_nota;
+                        rec_nova.recomendacao_texto = rec.recomendacao_texto;
+                        todas_recs.push(rec_nova);
+                    }
+                }
+    
+                res.json(todas_recs);
+            }
+        } catch (err) {
+            res.send(err);
+        }
     });
 
 
