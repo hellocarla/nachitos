@@ -6,7 +6,9 @@ const { celebrate, Joi } = require('celebrate');
 // IMPORT the controller
 const reservationsController = require('../controllers/reservationsController');
 var router = express.Router();
-
+const admin_funcionarioTokenValidation = require('../middleware/Auth_admin_func');
+const adminTokenValidation = require('../middleware/Auth_admin');
+const TokenValidation = require('../middleware/Auth_geral');
 
 // POST of new reservation WITH JOI (YAY)
 router.post('/', celebrate({
@@ -15,24 +17,25 @@ router.post('/', celebrate({
                 res_packageId: Joi.string().required()
             })
         }),
+    TokenValidation,
     reservationsController.postReservations
 );
 
 
-// GET all reservations
-router.get('/', reservationsController.getReservations);
+// GET all reservations http://localhost:8090/api/reservations
+router.get('/', admin_funcionarioTokenValidation, reservationsController.getReservations);
 
-// GET reservation by ID 
-router.get('/:_id', reservationsController.getReservationById);
+// GET reservation by ID http://localhost:8090/api/reservations/:_id
+router.get('/:_id', TokenValidation, reservationsController.getReservationById);
 
-// GET reservations by client ID 
-router.get('/reservation/:res_clientId', reservationsController.getReservationByClient);
+// GET reservations by client ID (for client)
+router.get('/res/:res_clientId', TokenValidation, reservationsController.getReservationByClient);
 
-// UPDATE reservation by ID
-router.put('/:_id', reservationsController.updateReservationById);
+// UPDATE reservation by ID http://localhost:8090/api/reservations/:_id
+router.put('/:_id', TokenValidation, reservationsController.updateReservationById);
 
-// DELETE reservation by ID
-router.delete('/:_id', reservationsController.deleteReservationById);
+// DELETE reservation by ID http://localhost:8090/api/reservations/:_id
+router.delete('/:_id', adminTokenValidation, reservationsController.deleteReservationById);
 
 // EXPORT the router so we can import it in the server
 module.exports = router;

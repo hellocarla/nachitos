@@ -4,6 +4,7 @@ const express = require('express');
 const countryController = require('../controllers/countryController');
 var router = express.Router();
 
+//GET all countries from API OMS
 router.get('/', countryController.getCountries);
 
 //Export

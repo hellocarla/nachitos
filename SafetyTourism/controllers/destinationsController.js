@@ -63,24 +63,6 @@ const getDestinations = function (req,res) {
     });
 };
 
-/*
-// GET specific destination by name
-const getDestinationByName = async function (req,res) {
-    try {
-        const check_destination = await Destinations.findOne({city_name: req.params.city_name}).exec();
-        if(!check_destination) {
-            return res.status(404).json({message: "city does not exist!"})
-        }
-        res.json(check_destination);
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({message: "erro durante o try"});
-    }
-
-}
-*/
-
 // GET specific destination by name
 const getDestinationByName = async function (req, res) {
     try {

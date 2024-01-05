@@ -1,3 +1,49 @@
+//NOVO
+//IMPORTS
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/usersController');
+const admin_funcionarioTokenValidation = require('../middleware/Auth_admin_func');
+const adminTokenValidation = require('../middleware/Auth_admin');
+const TokenValidation = require('../middleware/Auth_geral');
+
+//user Registration (POST); http://localhost:8090/api/users/register
+//Public acess
+router.post('/register', userController.regUsers);
+
+//user Login (POST); http://localhost:8090/api/users/login
+//Public acess
+router.post('/login', userController.loginUsers);
+
+//Current user info (POST); http://localhost:8090/api/users/current
+//Private acess
+router.get('/current', TokenValidation, userController.currentUser);
+
+//GET all Users http://localhost:8090/api/users
+//Private acess
+router.get('/', admin_funcionarioTokenValidation, userController.getUsers);
+
+//GET user by ID http://localhost:8090/api/users/:id
+//Private acess
+router.get('/:id', TokenValidation, userController.getUsersbyId);
+
+// UPDATE (patch) user http://localhost:8090/api/users/:id
+//Private acess
+router.put('/:id', TokenValidation, userController.updateUsers);
+
+//UPDATE user (Pedido de esquecimento de dados)
+
+
+// DELETE a user http://localhost:8090/api/users/:id
+//Private acess
+router.delete('/:id', adminTokenValidation, userController.deleteUsers);
+
+module.exports = router;
+
+
+
+//Até aqui
+/*
 // here we add pointers to functions that are called through the controller
 
 // IMPORT requirements
@@ -15,7 +61,6 @@ router.post('/', celebrate({
                 user_name: Joi.string().required().min(2).regex(/^[a-zA-ZÀ-ÖØ-öø-ÿÇç\s]+$/),
                 user_pw: Joi.string(),
                 user_email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).lowercase().required()       // fazer teste para falhar e pesquisar validação correcta
-/*
                 user_address: Joi.string().min(10),/*.valid("Rua",
                                                         "Avenida",
                                                         "Travessa",
@@ -25,7 +70,7 @@ router.post('/', celebrate({
                                                         "Bairro", " "),
                 user_postal: Joi.string().min(4).max(7).regex(/^[0-9-]+( [0-9-]+)$/),
                 user_phone: Joi.string().min(9).max(15).regex(/^[0-9]$/),
-                user_nif: Joi.string().min(7).max(20).regex(/^[0-9]$/)*/
+                user_nif: Joi.string().min(7).max(20).regex(/^[0-9]$/)
             }).options({abortEarly: false})
         }),
     usersController.createUser
@@ -52,3 +97,4 @@ router.delete('/:user_id', usersController.deleteUser);
 
 // EXPORT the router so we can import it in the server
 module.exports = router;
+*/
