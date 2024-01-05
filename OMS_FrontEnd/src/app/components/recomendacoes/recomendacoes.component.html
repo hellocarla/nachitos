@@ -1,0 +1,11 @@
+<h2>Los Recomendos</h2>
+<ul class="recs">
+    <li *ngFor="let rec of recs">
+        <button type="button" class="btn btn-outline-dark" (click)="onSelect(rec)">
+            <span class="cod_recomendacao">{{rec.cod_recomendacao}}</span>
+        </button>
+    </li>
+</ul>
+
+<app-recomendacoes-details [selectedRec]="selectedRec"></app-recomendacoes-details>
+<app-recomendacoes-form (recCreated)="onRecCreated($event)"></app-recomendacoes-form>

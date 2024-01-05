@@ -83,7 +83,6 @@ router.get('/', async function (req, res) {
 });
 
 
-
 // Get de um país específico por nome
 router.get('/nome/:nome_pais', async function(req,res) {
     try{

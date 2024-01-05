@@ -1,0 +1,34 @@
+<h1>{{ title | uppercase }}</h1>
+
+<!-- As a heading -->
+
+  <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary">
+      <a class="navbar-brand" href="#">Welcome to OMS</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" routerLink="/">A Casa</a>
+            <a class="nav-link" routerLink="/viruses">Os Virosos</a>
+            <a class="nav-link" routerLink="/areas">As Arenas</a>
+            <a class="nav-link" routerLink="/paises">Os Paises</a>
+            <a class="nav-link" routerLink="/surtos">Os Surtos</a>
+            <a class="nav-link" routerLink="/recomendacoes">As Recos</a>
+        </div>
+      </div>
+  </nav>
+
+
+<!--
+<nav class="navbar sticky-top bg--body-tertiary">
+    <a routerLink="/">A Casa</a>
+    <a routerLink="/viruses">Os Virosos</a>
+    <a routerLink="/areas">As Arenas</a>
+    <a routerLink="/paises">Os Paises</a>
+    <a routerLink="/surtos">Os Surtos</a>
+    <a routerLink="/recomendacoes">As Recos</a>
+</nav>
+-->
+
+<router-outlet></router-outlet>

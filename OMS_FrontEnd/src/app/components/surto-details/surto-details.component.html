@@ -1,0 +1,14 @@
+<div *ngIf="selectedSurto">
+    <h2>OUTBREAK # {{selectedSurto.cod_surto}}</h2>
+        <div><b>Code:</b> {{selectedSurto.cod_surto}}</div>
+        <br>
+        <div><b>Area:</b><app-area-details [selectedArea]="selectedSurto.cod_zonageo">
+        </app-area-details></div>
+        <br>
+        <div><b>Virus Associado:</b><app-virus-details [selectedVirus]="selectedSurto.cod_virus">
+        </app-virus-details></div>
+        <br>
+        <div><b>Data Inicio:</b> {{selectedSurto.data_inicio}}</div>
+        <br>
+        <div><b>Data Fim:</b> {{selectedSurto.data_fim}}</div>
+</div>
