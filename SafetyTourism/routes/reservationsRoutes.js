@@ -17,24 +17,24 @@ router.post('/', celebrate({
                 res_packageId: Joi.string().required()
             })
         }),
-    //TokenValidation,
+    TokenValidation,
     reservationsController.postReservations
 );
 
 
-// GET all reservations
-router.get('/', reservationsController.getReservations);
+// GET all reservations http://localhost:8090/api/reservations
+router.get('/', admin_funcionarioTokenValidation, reservationsController.getReservations);
 
-// GET reservation by ID 
+// GET reservation by ID http://localhost:8090/api/reservations/:_id
 router.get('/:_id', TokenValidation, reservationsController.getReservationById);
 
 // GET reservations by client ID (for client)
-router.get('/reservation/:res_clientId', TokenValidation, reservationsController.getReservationByClient);
+router.get('/res/:res_clientId', TokenValidation, reservationsController.getReservationByClient);
 
-// UPDATE reservation by ID
+// UPDATE reservation by ID http://localhost:8090/api/reservations/:_id
 router.put('/:_id', TokenValidation, reservationsController.updateReservationById);
 
-// DELETE reservation by ID
+// DELETE reservation by ID http://localhost:8090/api/reservations/:_id
 router.delete('/:_id', adminTokenValidation, reservationsController.deleteReservationById);
 
 // EXPORT the router so we can import it in the server

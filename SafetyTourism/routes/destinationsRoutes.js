@@ -24,15 +24,15 @@ router.post('/', celebrate({
                 country_name: Joi.string().required().regex(/^[a-zA-ZÀ-ÖØ-öø-ÿÇç\s]+$/)     // fetch from database, check if it needs validation
             })
         }),
+    admin_funcionarioTokenValidation,
     destinationsController.postDestinations
 );
-
 
 // GET all destinations
 router.get('/', TokenValidation, destinationsController.getDestinations);
 
 // GET destination by ID
-router.get('/:_id', admin_funcionarioTokenValidation, destinationsController.getDestinationById);
+router.get('/:_id', TokenValidation, destinationsController.getDestinationById);
 
 // GET destination by name
 router.get('/city/:city_name', TokenValidation, destinationsController.getDestinationByName);

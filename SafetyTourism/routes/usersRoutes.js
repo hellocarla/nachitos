@@ -19,22 +19,22 @@ router.post('/login', userController.loginUsers);
 //Private acess
 router.get('/current', TokenValidation, userController.currentUser);
 
-//GET all Users
+//GET all Users http://localhost:8090/api/users
 //Private acess
 router.get('/', admin_funcionarioTokenValidation, userController.getUsers);
 
-//GET user by ID
+//GET user by ID http://localhost:8090/api/users/:id
 //Private acess
 router.get('/:id', TokenValidation, userController.getUsersbyId);
 
-// UPDATE (patch) user
+// UPDATE (patch) user http://localhost:8090/api/users/:id
 //Private acess
 router.put('/:id', TokenValidation, userController.updateUsers);
 
 //UPDATE user (Pedido de esquecimento de dados)
 
 
-// DELETE a user
+// DELETE a user http://localhost:8090/api/users/:id
 //Private acess
 router.delete('/:id', adminTokenValidation, userController.deleteUsers);
 

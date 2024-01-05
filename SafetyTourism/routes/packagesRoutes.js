@@ -10,7 +10,7 @@ const admin_funcionarioTokenValidation = require('../middleware/Auth_admin_func'
 const adminTokenValidation = require('../middleware/Auth_admin');
 const TokenValidation = require('../middleware/Auth_geral');
 
-// POST WITH JOI (YAY)
+// POST packages WITH JOI (YAY)
 router.post('/', celebrate({
     body: Joi.object({
         cityId: Joi.string().required(),
@@ -23,13 +23,16 @@ admin_funcionarioTokenValidation,
 packagesController.postPackages
 );
 
+// GET all packages http://localhost:8090/api/packages
 router.get('/', admin_funcionarioTokenValidation, packagesController.getPackages);
 
+// GET packages by ID http://localhost:8090/api/packages/:id
 router.get('/:id', admin_funcionarioTokenValidation, packagesController.getPackagesById);
 
+// GET packages by city name http://localhost:8090/api/packages/city/:city
 router.get('/city/:city', TokenValidation, packagesController.getPackagesByName);
 
-//router.put('/:id', packagesController.updatePackages);
+//UPDATE packages by ID 
 router.put(
     '/:id',
     celebrate({
@@ -44,6 +47,7 @@ router.put(
     packagesController.updatePackages
   );
 
+//DELETE packages by ID 
 router.delete('/:id', adminTokenValidation, packagesController.deletePackages);
 
 
