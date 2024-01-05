@@ -3,6 +3,11 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+// CORS setup (for frontEnd access)
+const cors = require('cors');
+const corsOptions = { origin: '*'};
+app.use(cors(corsOptions));
+
 //MongoDB Connection
 var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);

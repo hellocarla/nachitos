@@ -9,6 +9,11 @@ var mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 mongoose.connect('mongodb+srv://pimpim:OCgI7DrXl8fjBqVF@cluster0.1tlphoo.mongodb.net/?retryWrites=true&w=majority')
 
+// Configura as opções para aceitar pedidos de qualquer fonte (*) e faz com que a API use CORS
+const cors = require('cors');
+const corsOptions = {origin: '*'};
+app.use(cors(corsOptions));
+
 //Usar JSON
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());

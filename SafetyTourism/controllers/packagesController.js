@@ -47,7 +47,9 @@ const getPackagesByName = async function (req, res) {
 // POST de um Pacote
 const postPackages = async function (req, res) {
     try {
-    const check_city = await Destinations.findById(req.body.cityId).exec()
+    
+    const check_city = await Destinations.findOne({city_name:req.body.city}).exec()
+    
     if(!check_city) {
         console.log(check_city);
         return res.status(409).json({ message: "A cidade indicada não existe."})
@@ -72,16 +74,17 @@ const postPackages = async function (req, res) {
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Erro no try."});
+        
+       res.status(500).json({ message: "Erro no try."});
+       
     }
 };
 
 // PUT por ID
 const updatePackages = async function (req, res) {
     try {
-        
-        const updatePackages = await Packages.findById(req.params.id).exec();
-      
+    const updatePackages = await Packages.findById(req.params.id).exec();
+
         if (!updatePackages) {
            
             return res.json({ message: "Pacote não encontrado."});
@@ -93,7 +96,10 @@ const updatePackages = async function (req, res) {
                 if(!new_dest) {
                     return res.json({message: "Cidade não encontrada."});
                 }
-                else updatePackages.city=new_dest._id
+                else {
+                    updatePackages.city=new_dest.city_name;
+                    updatePackages.cityId=new_dest._id;
+                }
             }
             catch (error) {
                 console.error(error);
@@ -106,13 +112,12 @@ const updatePackages = async function (req, res) {
         }
         if (req.body.pack_price) {
 
-            updatePackages.pack_price=req.body.pack_price  + ' eur' ;
+            updatePackages.pack_price=req.body.pack_price;
         }
         if (req.body.pack_type) {
          
             updatePackages.pack_type=req.body.pack_type;
         }
-       
         updatePackages.save(function (err) {
             if (err)
                 res.send(err);
