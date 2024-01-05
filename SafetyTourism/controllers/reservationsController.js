@@ -1,50 +1,38 @@
 // IMPORTS
-const reservations = require('../models/reservations');
 const Reservations = require('../models/reservations');
+
 // IMPORT users
-const Users = require('../models/users');
+//const Users = require('../models/users');
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./userDB.db');
+
 // IMPORT packages
 const Packages = require('../models/packages');
 
-// POST (& save) Reservation http://localhost:8090/api/reservations
-/*const postReservations =  async function (req,res) {
-    try {
-    var reservation = new Reservations({
-        res_client: req.body.res_client,
-        res_package: req.body.res_package          
-    });
-
-    reservation.save(function(err) {
-        if(err) {
-            res.send(err),
-            console.log("erro ao guardar a reserva");
-        } else {
-            res.json({ message: 'nova reserva registada' });
-        }
-    });
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({message: "erro do try"});
-    }
-};
-*/
-
+// POST reservation http://localhost:8090/api/reservations
 const postReservations =  async function (req,res) {
-try {
-    var check_client = await Users.findOne({user_id: req.body.res_clientId})
+    try {
+    //const id = req.body.res_clientId; 
+    const { res_clientId, res_packageId } = req.body;
+
+    const result = await new Promise((resolve,reject) => {
+        db.get('SELECT * FROM users WHERE id = ?', [res_clientId], (error,row) => {
+            if (error) {
+                console.error(error.message);
+                reject({ error: 'Internal server error' });
+            }
+            if (!row) {
+                reject({ error: 'User not found' });
+            } else { 
+                if(row.user_address==null || row.user_NIF==null ||row.user_phonenumber==null){
+                    reject({message: "Preencha os campos em falta, nabiça!"})
+                } else {
+                    resolve(row);
+                }
+            }
+        })
+    });
     
-    //Se o cliente não existir, envia uma resposta a indicar que não foi encontrado
-    if(!check_client) {
-        return res.status(404).json({message: "Este cliente não existe!"})
-    } else {
-        if(check_client.user_address==null || check_client.user_postal==null ||check_client.user_phone==null || check_client.user_nif==null){
-            return res.json({message: "Preencha os campos em falta, nabiça!"})
-        }
-    };
-    
-    //Se o cliente existir tem de ter user_adress, user_postal, user_phone, user_nif com os dados.
-   
     const check_package = await Packages.findOne({_id: req.body.res_packageId})
     //Se o pacote não existir, envia uma resposta a indicar que não foi encontrado
     if(!check_package) {
@@ -52,8 +40,8 @@ try {
     }
 
     var reservation = new Reservations ();
-    reservation.res_clientId = check_client.user_id
-    reservation.res_client = check_client.user_name;
+    reservation.res_clientId = result.id
+    reservation.res_client = result.user_name;
     reservation.res_city = check_package.city;
     reservation.res_packageId = check_package._id;
     reservation.res_package = check_package.pack_type;
@@ -115,21 +103,6 @@ const getReservationByClient = async function (req,res) {
     }
 };
 
-
-/*const getReservationByClient = async function (req,res) {
-    try {
-        const check_client = await Reservations.find({res_client: req.params.res_client}).exec();
-        if(!check_client) {
-            return res.status(404).json({message: "Cliente não existe!"})
-        }
-        res.json(check_client);
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({message: "erro durante o try"});
-    }
-};
-*/
 
 // UPDATE reservation by ID
 const updateReservationById = async function (req,res) {

@@ -1,4 +1,4 @@
-//IMPORTS
+/*IMPORTS
 //const UsersSQL = require('../models/usersSQL');
 const sqlite3 = require('sqlite3').verbose();
 //const RegUserRoutes = require('../routes/RegUserRoutes');
@@ -106,3 +106,4 @@ module.exports={
     updateUsers,
     deleteUsers
 }
+*/

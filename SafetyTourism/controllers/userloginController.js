@@ -1,4 +1,4 @@
-//IMPORTS
+/*IMPORTS
 const sqlite3 = require('sqlite3').verbose();
 //const RegUserRoutes = require('../routes/RegUserRoutes');
 const db = new sqlite3.Database('./userDB.db');
@@ -70,3 +70,4 @@ const comparePasswords = (user_pw, hashedPassword) => {
 module.exports={
     postloginUsers,
 }
+*/

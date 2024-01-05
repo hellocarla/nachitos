@@ -18,12 +18,12 @@ const admin_funcionarioTokenValidation = asyncHandler(async (req, res, next) =>{
                 return res.status(403).json({ message: 'Permissão negada' });
             }
             req.user = decoded;
-            console.log(req.user);
+            //console.log(req.user);
             next();
         })
         /*
         if(!token){
-            return res.status(401).json({"User is not authorized or token is missing!"});
+            return res.status(401).json({message: "User is not authorized or token is missing!"});
         }
         */
     }

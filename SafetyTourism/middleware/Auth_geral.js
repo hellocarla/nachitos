@@ -11,11 +11,8 @@ const TokenValidation = asyncHandler(async (req, res, next) =>{
             if(err) {
                 return res.status(401).json({ error: "User is not authorized!"});                 
             }
-
-            if(userType == 'client') {
-                req.user = decoded;
-                next();
-            }
+        req.user = decoded;
+        next();
         })
     }
 });

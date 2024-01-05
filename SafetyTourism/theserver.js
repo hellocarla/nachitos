@@ -57,17 +57,12 @@ app.use('/api/users', usersRoutes);
 var countryRoutes = require('./routes/countryRoutes');
 app.use('/api/country', countryRoutes);
 
-var RegUserRoutes = require('./routes/RegUserRoutes');
-app.use('/api/sql', RegUserRoutes);
+//var RegUserRoutes = require('./routes/RegUserRoutes');
+//app.use('/api/sql', RegUserRoutes);
 
-var loginRoutes = require('./routes/loginRoutes');
-app.use('/api/login', loginRoutes);
+//var loginRoutes = require('./routes/loginRoutes');
+//app.use('/api/login', loginRoutes);
 
-/*
-//adicionei agora
-var middlewareRoutes = require('./routes/middlewareRoutes');
-app.use('api/auth', middlewareRoutes);
-*/
 
 //Server
 app.listen(8090, () => {

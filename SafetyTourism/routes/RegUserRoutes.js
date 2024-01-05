@@ -1,3 +1,4 @@
+/*
 // IMPORTS
 const express = require('express');
 const userSqlController = require('../controllers/userSqlController');
@@ -12,7 +13,7 @@ router.post('/', userSqlController.postUsers);
 router.get('/', admin_funcionarioTokenValidation, userSqlController.getUsers);
 
 //GET user by ID
-router.get('/user/:id',admin_funcionarioTokenValidation, userSqlController.getUsersbyId);
+router.get('/:id',admin_funcionarioTokenValidation, userSqlController.getUsersbyId);
 
 // UPDATE (patch) a user
 router.put('/:id',userSqlController.updateUsers);
@@ -21,3 +22,4 @@ router.put('/:id',userSqlController.updateUsers);
 router.delete('/:id', adminTokenValidation, userSqlController.deleteUsers);
 
 module.exports = router;
+*/

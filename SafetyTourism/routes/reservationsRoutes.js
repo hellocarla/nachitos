@@ -17,26 +17,22 @@ router.post('/', celebrate({
                 res_packageId: Joi.string().required()
             })
         }),
-    TokenValidation,
+    //TokenValidation,
     reservationsController.postReservations
 );
 
 
 // GET all reservations
-router.get('/', admin_funcionarioTokenValidation, reservationsController.getReservations);
+router.get('/', reservationsController.getReservations);
 
 // GET reservation by ID 
-router.get('/:_id', admin_funcionarioTokenValidation, reservationsController.getReservationById);
-
-// GET reservations by client ID 
-//router.get('/reservation/:res_clientId', admin_funcionarioTokenValidation, reservationsController.getReservationByClient);
+router.get('/:_id', TokenValidation, reservationsController.getReservationById);
 
 // GET reservations by client ID (for client)
 router.get('/reservation/:res_clientId', TokenValidation, reservationsController.getReservationByClient);
 
-
 // UPDATE reservation by ID
-router.put('/:_id', admin_funcionarioTokenValidation, reservationsController.updateReservationById);
+router.put('/:_id', TokenValidation, reservationsController.updateReservationById);
 
 // DELETE reservation by ID
 router.delete('/:_id', adminTokenValidation, reservationsController.deleteReservationById);
