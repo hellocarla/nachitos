@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Recomendacoes } from 'src/app/recomendacoes';
 import { RecomendacoesService } from 'src/app/services/recomendacoes.service';
+import { RecomendacoesDTO } from 'src/app/RecomendacoesDTO';
+
 
 @Component({
   selector: 'app-recomendacoes',
@@ -26,6 +28,10 @@ export class RecomendacoesComponent {
       .subscribe((data: Recomendacoes[]) => {
         this.recs = data;
       });
+  }
+
+  onRecCreated(newRec: RecomendacoesDTO): void {
+    this.getRecs();
   }
 
 }

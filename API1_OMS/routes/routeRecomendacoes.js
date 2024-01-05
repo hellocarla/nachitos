@@ -171,6 +171,20 @@ router.get('/:cod_recomendacao', async function(req, res) {
         if (!recomendacao) {
             return res.status(404).json({ message: 'A recomendacao com o código ' + req.params.cod_recomendacao + ' não existe!' });
         }
+
+        const zona_mae = await Zona.findById(recomendacao.cod_zonageo).exec();
+        const surto_pai = await Surtos.findById(recomendacao.cod_surto)
+            .populate("cod_virus").exec();
+
+            //surto_pai.cod_virus = await Virus.populate(surto_pai.cod_virus, {path: "cod_virus"});
+        //const virus_filho = await Virus.findById(rec.cod_virus).exec();
+
+        if(zona_mae && surto_pai) {
+
+            recomendacao.cod_zonageo = zona_mae;
+            recomendacao.cod_surto = surto_pai;
+
+        }
         res.json(recomendacao);
     }  
     catch (error) {
@@ -178,6 +192,11 @@ router.get('/:cod_recomendacao', async function(req, res) {
         res.status(500).json({ message: 'Erro no TRY!' });
     }
 });
+
+
+
+
+
 
 router.put('/:cod_recomendacao', async function (req, res) {
 try {
@@ -225,5 +244,26 @@ router.delete('/:cod_recomendacao', async function (req, res) {
         res.json({ error: 'Erro no TRY!' });
     }
 });
+
+
+
+
+// trying to unnest object surto
+function listAll(surto_detalhado) {
+    let surto_pai = surto_detalhado;
+    let result = [];
+
+     while (surto_pai !== null) {
+        result = result.concat(Object.getOwnPropertyNames(surto_pai));
+        surto_pai = Object.getPrototypeOf(surto_pai);
+        }
+
+        return result;
+
+ }
+
+
+
+
 
 module.exports = router;

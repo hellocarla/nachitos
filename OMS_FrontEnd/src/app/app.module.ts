@@ -24,6 +24,7 @@ import { SurtoDetailsComponent } from './components/surto-details/surto-details.
 import { SurtoFormComponent } from './components/surto-form/surto-form.component';
 import { RecomendacoesComponent } from './components/recomendacoes/recomendacoes.component';
 import { RecomendacoesDetailsComponent } from './components/recomendacoes-details/recomendacoes-details.component';
+import { RecomendacoesFormComponent } from './components/recomendacoes-form/recomendacoes-form.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { RecomendacoesDetailsComponent } from './components/recomendacoes-detail
     SurtoDetailsComponent,
     SurtoFormComponent,
     RecomendacoesComponent,
-    RecomendacoesDetailsComponent
+    RecomendacoesDetailsComponent,
+    RecomendacoesFormComponent
   ],
   imports: [
     BrowserModule,

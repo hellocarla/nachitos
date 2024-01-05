@@ -1,0 +1,27 @@
+<h2>Create a new recommendation for an area and outbreak:</h2>
+<form [formGroup]="recForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="cod_recomendacao">Code:</label>
+        <input type="text" id="cod_recomendacao" formControlName="cod_recomendacao" placeholder="R###">
+        <br>
+        <label for="cod_zonageo">Zona:</label>
+        <select id="cod_zonageo" formControlName="cod_zonageo">
+            <option *ngFor="let area of possibleAreas" value={{area.cod_zonageo}}>{{area.nome_zonageo}}</option>
+        </select>
+        <br>
+        <label for="cod_surto">Surto Associado:</label>
+        <select id="cod_surto" formControlName="cod_surto">
+            <option *ngFor="let surto of possibleSurtos" value={{surto.cod_surto}}>{{surto.cod_surto}}</option>
+        </select>
+        <br>
+        <label for="data_nota">Data inicio:</label>
+        <input type="date" id="data_nota" formControlName="data_nota">
+        <br>
+        <label for="validade_nota">Validade (em dias):</label>
+        <input type="text" id="validade_nota" formControlName="validade_nota" placeholder="# de dias">
+        <br>
+
+        <button type="submit" class="btn btn-success" [disabled]="!recForm.valid">Create a new recommendation</button>
+        
+    </div>
+</form>
