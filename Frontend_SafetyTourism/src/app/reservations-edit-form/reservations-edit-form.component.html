@@ -1,0 +1,11 @@
+<form [formGroup]="reservationsEditForm" (ngSubmit)="onSave()">
+   <div>
+       <label for="res_client">Editar a reserva do cliente:</label>
+       <input type="text" id="res_client" formControlName="res_client"/>
+   </div>
+   <div>
+       <label for="res_package">Editar o pacote do cliente:</label>
+       <input type="text" id="res_package" formControlName="res_package"/>
+   </div>
+       <button type="submit">Salvar</button>
+   </form>

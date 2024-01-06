@@ -1,0 +1,91 @@
+body {
+    font-family: Arial , sans-serif; line-height: 1.6;
+    margin: 0; padding: 0;
+    background-color: #f4f4f4; color: #010007;
+    }
+   
+    /* Example component styles */
+    .app-component {
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff; margin-bottom: 20px;
+    }
+
+/* CSS para itens com ids específicos */
+    #footerTitle {
+        text-align: center;
+    }
+
+    #footerText {
+        font-size: small;
+        margin-left: 10px;
+        text-align: center;
+        background-color: wheat;
+    }
+
+    #bigTitle {
+        font-size: 69px;
+    }
+
+    #saftou {
+        margin-left: 360px;
+    }
+
+    /* CSS para não mostrar em lista vertical */
+    ul {
+        list-style: none;
+    }
+
+    li {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* button CSS style - bootstrap */
+    .btn-primary-outline {
+        background-color: transparent;
+        border-color: transparent;
+    }
+
+    /* CSS para títulos das cidades nos details */
+
+    #cidade_titulo {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    /* CSS para navbar */
+    nav {
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        display: flex;
+    }
+
+    a {
+        color: black;
+    }
+
+    .navbar {
+        display: flex;
+    }
+
+    .nav-link {
+        color: black;
+    }
+
+    .nav-link:hover {
+        color: black;
+    }
+
+    .nav-link:active {
+        color: pink;
+    }
+
+    /* CSS de teste para imagem de fundo */
+
+    img {
+        object-fit: fill;
+        opacity: 0.5;
+    }

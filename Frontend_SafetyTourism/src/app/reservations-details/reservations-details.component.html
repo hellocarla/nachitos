@@ -1,0 +1,7 @@
+<div *ngIf="selectedReservation">
+    <h2>{{selectedReservation.res_city}} Detalhes da reserva</h2>
+    <div><b>ID da reserva:</b> {{selectedReservation._id}}</div>
+    <div><b>Nome do cliente:</b> {{selectedReservation.res_client}}</div>
+    <div><b>Reserva para:</b> {{selectedReservation.res_city}}</div>
+    <div><b>Reserva do pacote:</b> {{selectedReservation.res_package}}</div>
+</div>

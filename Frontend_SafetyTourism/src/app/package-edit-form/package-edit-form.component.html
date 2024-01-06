@@ -1,0 +1,23 @@
+<form [formGroup]="packageEditForm" (ngSubmit)="onSave()">
+ <div>
+    <label for="_id">Id do pacote:</label>
+    <input type="text" id="_id" formControlName="_id"/>
+</div>
+<div>
+    <label for="city">Editar o destino do pacote:</label>
+    <input type="text" id="city" formControlName="city"/>
+</div>
+<div>
+    <label for="pack_desc">Editar a descrição do pacote:</label>
+    <input type="text" id="pack_desc" formControlName="pack_desc"/>
+</div>
+<div>
+    <label for="pack_price">Editar o preço do pacote:</label>
+    <input type="text" id="pack_price" formControlName="pack_price"/>
+</div>
+<div>
+    <label for="pack_type">Editar o tipo de pacote:</label>
+    <input type="text" id="pack_type" formControlName="pack_type"/>
+</div>
+    <button type="submit">Save</button>
+</form>

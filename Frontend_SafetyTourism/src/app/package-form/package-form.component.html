@@ -1,0 +1,19 @@
+<h2>Crie um novo pacote</h2>
+<form [formGroup]="packageForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="city">Destino:</label>
+        <input type="text" id="city" formControlName="city"><br>
+
+        <label for="pack_desc">Descrição do pacote:</label>
+        <input type="text" id="pack_desc" formControlName="pack_desc"><br>
+
+        <label for="pack_price">Preço do pacote:</label>
+        <input type="text" id="pack_price" formControlName="pack_price"><br>
+
+        <label for="pack_type">Tipo de pacote:</label>
+        <input type="text" id="pack_type" formControlName="pack_type"><br>
+
+    </div>
+    <button type="submit" [disabled]="!packageForm.valid">Criar novo pacote</button>
+</form>
+ 

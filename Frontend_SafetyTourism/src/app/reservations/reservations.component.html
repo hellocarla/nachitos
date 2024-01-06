@@ -1,0 +1,13 @@
+<h2>Reservas</h2>
+<ul class="reservations">
+    <li *ngFor="let reservation of reservations">
+        <button type="button" (click)="onSelect(reservation)">
+            <span class="name">{{reservation.res_client}}</span>
+        </button>
+    </li>
+</ul>
+<app-reservations-details [selectedReservation]="selectedReservation"></app-reservations-details>
+<app-reservations-edit-form *ngIf="selectedReservation" [reservations]="selectedReservation" (reservationsEdited)="onReservationsEdited($event)"></app-reservations-edit-form>
+<app-reservations-form> (reservationsCreated)="onReservationsCreated($event)" ></app-reservations-form>
+<app-reservations-delete-form *ngIf="selectedReservation" [reservations]="selectedReservation" (reservationsDeleted)="onReservationsDeleted($event)"></app-reservations-delete-form>
+

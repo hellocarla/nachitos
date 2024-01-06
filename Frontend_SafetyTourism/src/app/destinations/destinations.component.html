@@ -1,0 +1,12 @@
+<h2>Destinos</h2>
+<ul class="destinations">
+    <li *ngFor="let destination of destination">
+        <button type="button" class="btn btn-primary-outline" (click)="onSelect(destination)">
+            <span class="name">{{destination.city_name}}</span>
+        </button>
+    </li>
+</ul>
+<app-destinations-details [selectedDestination]="selectedDestination"></app-destinations-details>
+<app-destinations-edit-form (destinationEdited)="onDestinationEdited($event)" *ngIf=" selectedDestination" [destination]="selectedDestination"></app-destinations-edit-form>
+<app-destinations-delete-form (destinationDeleted)="onDestinationDeleted($event)" *ngIf="selectedDestination" [destination]="selectedDestination"></app-destinations-delete-form>
+<app-destinations-form (destinationCreated)="onDestinationCreated($event)"></app-destinations-form>

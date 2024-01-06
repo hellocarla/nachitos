@@ -1,0 +1,18 @@
+<h2>Crie um novo destino</h2>
+<form [formGroup]="destinationForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="city_name">Cidade de destino:</label>
+        <input type="text" id="city_name" formControlName="city_name">
+    </div>
+    <div>
+        <label for="city_desc">Descrição:</label>
+        <input type="text" id="city_desc" formControlName="city_desc">
+    </div>
+    <div>
+        <label for="country_name">País:</label>
+        <input type="text" id="country_name" formControlName="country_name">
+    </div>
+    <button type="submit" [disabled]="!destinationForm.valid">Criar destino
+        </button>
+</form>
+
