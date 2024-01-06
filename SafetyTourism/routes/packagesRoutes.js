@@ -6,8 +6,11 @@ const { celebrate, Joi, Segments } = require('celebrate');
 // IMPORT the controller
 const packagesController = require('../controllers/packagesController');
 var router = express.Router();
+const admin_funcionarioTokenValidation = require('../middleware/Auth_admin_func');
+const adminTokenValidation = require('../middleware/Auth_admin');
+const TokenValidation = require('../middleware/Auth_geral');
 
-// POST WITH JOI (YAY)
+// POST packages WITH JOI (YAY)
 router.post('/', celebrate({
     body: Joi.object({
         city: Joi.string().required(),
@@ -16,15 +19,20 @@ router.post('/', celebrate({
         pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião').required()
     })
 }),
+admin_funcionarioTokenValidation,
 packagesController.postPackages
 );
 
-router.get('/', packagesController.getPackages);
+// GET all packages http://localhost:8090/api/packages
+router.get('/', admin_funcionarioTokenValidation, packagesController.getPackages);
 
-router.get('/:id', packagesController.getPackagesById);
+// GET packages by ID http://localhost:8090/api/packages/:id
+router.get('/:id', admin_funcionarioTokenValidation, packagesController.getPackagesById);
 
-router.get('/city/:city', packagesController.getPackagesByName);
+// GET packages by city name http://localhost:8090/api/packages/city/:city
+router.get('/city/:city', TokenValidation, packagesController.getPackagesByName);
 
+//UPDATE packages by ID 
 router.put(
   '/:id',
   (req, res, next) => {
@@ -43,26 +51,12 @@ router.put(
       pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião')
     })
   }),
-  packagesController.updatePackages
+   admin_funcionarioTokenValidation,
+   packagesController.updatePackages
 );
 
-/*
-router.put(
-  '/:id',
-  celebrate({
-    body: Joi.object({
-      id: Joi.string(),
-      city: Joi.string(),
-      pack_desc: Joi.string().min(5).max(280),
-      pack_price: Joi.string(),
-      pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião')
-    })
-  }),
-  packagesController.updatePackages
-);
-*/
-
-router.delete('/:id', packagesController.deletePackages);
+//DELETE packages by ID 
+router.delete('/:id', adminTokenValidation, packagesController.deletePackages);
 
 
 // EXPORT the router so we can import it in the server

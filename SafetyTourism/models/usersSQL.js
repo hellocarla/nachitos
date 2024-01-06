@@ -36,5 +36,6 @@ const saveUser = async (user_name,
 
 // EXPORTS
 module.exports = {
+    hashPassword,
     saveUser
 }
