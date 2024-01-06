@@ -1,0 +1,13 @@
+<h2>Add new area:</h2>
+<br>
+<form [formGroup]="areaForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="nome_zonageo">Nome:</label>
+        <input type="text" id="nome_zonageo" placeholder="Cool New Area" formControlName="nome_zonageo">
+        <br>
+        <label for="cod_zonageo">codigo:</label>
+        <input type="text" id="cod_zonageo" placeholder="Z###" formControlName="cod_zonageo">
+    </div>
+    <br><br>
+    <button type="submit" [disabled]="!areaForm.valid" class="btn btn-success">Create place</button>
+</form>

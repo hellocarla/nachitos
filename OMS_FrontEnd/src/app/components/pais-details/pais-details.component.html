@@ -1,0 +1,9 @@
+<div *ngIf="selectedPais">
+    <h2>{{selectedPais.nome_pais}} Hello</h2>
+    <div><b>Nome:</b> {{selectedPais.nome_pais}}</div>
+    <br>
+    <div><b>Code:</b> {{selectedPais.cod_pais}}</div>
+    <br>
+    <div><b>Zona Geo:</b> <app-area-details [selectedArea]="selectedPais.cod_zonageo">
+    </app-area-details></div>
+</div>
