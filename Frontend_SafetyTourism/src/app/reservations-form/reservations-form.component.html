@@ -1,0 +1,16 @@
+<h2>Criar nova reserva</h2>
+<form [formGroup]="ReservationForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="res_clientId">ID do cliente:</label>
+        <input type="text" id="res_clientId" formControlName="res_clientId">
+    </div>
+    <div>
+        <label for="res_packageId">ID do pacote</label>
+        <input type="text" id="res_packageId" formControlName="res_packageId">
+    </div>
+    <button type="submit" [disabled]="!ReservationForm.valid">Criar reserva</button>
+</form>
+
+
+
+

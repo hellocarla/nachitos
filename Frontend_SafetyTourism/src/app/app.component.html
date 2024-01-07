@@ -1,0 +1,54 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<h1 id="saftou">{{ title }}</h1>
+
+<!-- Barra nav -->
+<nav class="navbar navbar-expand-sm sticky-top bg-body-tertiary">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" routerLink="/">Página Inicial</a>
+          <a class="nav-link" routerLink="/destinations">Destinos</a>
+          <a class="nav-link" routerLink="/packages">Pacotes disponíveis</a>
+          <a class="nav-link" routerLink="/reservations">Reservas</a>
+      </div>
+    </div>
+</nav>
+
+
+<!-- footer -->
+<footer class="fixed-bottom bg-body-tertiary text-center text-lg-start">
+          <h5 class="text-uppercase" id="footerTitle">Inrica, Lda.</h5>
+          <p id="footerText">
+            Este trabalho foi realizado pela Carla, Inês e Rita no âmbito do curso UPSKILL, turma de '24.
+            <br>
+            Foi desenvolvido em Node.js e Angular com ajuda do bootstrap.
+            <br>
+            Obrigada por visitarem o nosso cantinho da internet. Tenham um bom dia!
+          </p>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+      © 2024 Copyright:
+      <a class="text-body" href="https://linkedin.com/CarlaVieira6/">Carla Vieira</a> | <a class="text-body" href="https://linkedin.com/inesdejesusfernandes">Inês Fernandes</a> | <a class="text-body" href="https://linkedin.com/ritaasgomes">Rita Gomes</a>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+<app-homepage>
+</app-homepage>
+<router-outlet></router-outlet>
