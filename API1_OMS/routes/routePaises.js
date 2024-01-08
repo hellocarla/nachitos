@@ -82,6 +82,36 @@ router.get('/', async function (req, res) {
     }
 });
 
+// GET de PAISES por ZONA
+router.get('/zona/:cod_zonageo', async function(req,res) {
+    try{
+        const zonas = await Paises.find({cod_zonageo: req.params.cod_zonageo});
+        if (!zonas) {
+            return res.status(204).json({message: 'did not find zone' + error});
+        }
+
+        var paises = [];
+        for(const zona of zonas) {
+            var pais = zonas.nome_pais;
+            if(pais == null) {
+                paises.push(zona);
+            }
+        }
+
+        if(paises.length===0) {
+            res.json({message: 'nenhum país encontrado nesta zona'});
+        }
+        else {
+            res.json(paises);
+        }
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erro no TRY!' });
+    }
+});
+
+
 
 // Get de um país específico por nome
 router.get('/nome/:nome_pais', async function(req,res) {

@@ -1,9 +1,10 @@
 var express = require('express');
 var Zona = require('../app/models/zona');
+var Paises = require('../app/models/paises')
 var router = express.Router();
 
 
-// POST http://localhost:8082/api/zona
+// POST http://localhost:8080/api/zona
 router.post('/', async function (req, res) {
     try{
         const check_zona = await Zona.findOne({cod_zonageo: req.body.cod_zonageo});
@@ -57,6 +58,7 @@ router.get('/:cod_zonageo', async function(req,res) {
         res.status(500).json({ message: 'Erro no TRY!' });
     }
 });
+
 
 
 // Delete de uma zona geográfica pelo código de zona

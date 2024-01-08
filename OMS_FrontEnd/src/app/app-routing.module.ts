@@ -5,8 +5,10 @@ import { AreasComponent } from './components/areas/areas.component';
 import { PaisComponent } from './components/pais/pais.component';
 import { SurtoComponent } from './components/surto/surto.component';
 import { RecomendacoesComponent } from './components/recomendacoes/recomendacoes.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'viruses', component: VirusComponent },    // this indicates what component the paths should call/show
   // we can add different route expectations like calling a 404 or defaulting to /home etc
   { path: 'areas', component: AreasComponent },

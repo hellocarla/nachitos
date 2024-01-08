@@ -120,6 +120,51 @@ const getDestinationByName = async function (req, res) {
     }
 }
 
+// GET destinations by country
+const getDestinationByCountry = async function(req,res) {       // router.get('/paises/:nome_pais', 
+
+    // fazer um get das cidades por país
+    // tenho de ir à api 1 buscar os países por nome daquele que está a ser procurado no path
+    // (p.ex. /Portugal deve ir buscar à API 1 o país Portugal
+    // ou seja, procuro país na API1
+    // depois faço um get de cidade por país
+    // que seja igual ao req.params.country_name
+    // sendo que country_name = API2 e nome_pais = API1
+    try{
+
+        if (!listaPaises) {
+            return res.status(500).json({ message: "Lista de países não foi carregada." });
+        }
+
+        const countries = listaPaises.some(pais => pais.nome_pais === req.body.country_name);
+
+        if (!countries) {
+            return res.status(404).json({ message: "Este país não existe na lista de países." });
+        }
+
+        var cities = [];
+        for(const country of countries) {
+            var city = countries.nome_pais;
+            if(city == null) {
+                cities.push(country);
+            }
+        }
+
+        if(cities.length===0) {
+            res.json({message: 'cidades não encontradas para este país'});
+        } else {
+            res.json(cities);
+        }
+
+    } catch(error) {
+        console.error(error);
+        res.status(500).json({message: 'erro durante a tentativa, ' + error});
+    }
+
+};
+
+
+
 // GET destination by id
 const getDestinationById = function (req, res) {
     Destinations.findById(req.params._id, function (err, destination) {
@@ -179,6 +224,8 @@ module.exports= {
     getDestinationByName,
     getDestinationById,
     updateDestination,
-    deleteDestination
+    deleteDestination,
+
+    getDestinationByCountry
     }
 // we do NOT use module.export because that is a single export syntax, and we're doing multiple exports

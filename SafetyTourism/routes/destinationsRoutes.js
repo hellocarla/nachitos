@@ -37,6 +37,9 @@ router.get('/:_id', TokenValidation, destinationsController.getDestinationById);
 // GET destination by name
 router.get('/city/:city_name', TokenValidation, destinationsController.getDestinationByName);
 
+// GET destinations by COUNTRY (doesn't work yet)
+router.get('/paises/:country_name', TokenValidation, destinationsController.getDestinationByCountry);
+
 // PUT (OR PATCH) a destination by id
 // router.put('/:id', destinationsController.putDestination);
 router.put('/:city_name', admin_funcionarioTokenValidation, destinationsController.updateDestination);

@@ -8,7 +8,6 @@ h1 {
     font-size: 30px;
     font-weight: bolder;
     text-align: center;
-    margin-top: 50px;
 }
 
 h2 {
@@ -46,6 +45,11 @@ ul {
     padding: 0;
 }
 
+li {
+    display: inline-block;  /* show horizontally */
+    margin-right: 10px; /* add spacing between items */
+  }
+
 /*
 TRY LATER
 
@@ -58,5 +62,4 @@ TRY LATER
     font-size: 100px;
     text-align: center;
     font-weight: bolder;
-    margin-top: 200px;
 }

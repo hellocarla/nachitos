@@ -194,9 +194,6 @@ router.get('/', async function (req,res) {
 
 
 
-
-
-
 // GET de todas as recs com objecto ZONA e SURTO
     router.get('/', async function (req,res) {
         try {
@@ -227,7 +224,7 @@ router.get('/', async function (req,res) {
     });
 
 
-// Get de uma recomendação pelo código de recomendação
+// Get de uma recomendação pelo código de recomendação COM OBJECTO ZONA, SURTO E VIRUS
 router.get('/:cod_recomendacao', async function(req, res) {
     try{
         const recomendacao = await Recomendacoes.findOne({cod_recomendacao: req.params.cod_recomendacao});

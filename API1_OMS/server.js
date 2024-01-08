@@ -37,5 +37,7 @@ var recomendacoesRoutes=require('./routes/routeRecomendacoes');
 app.use('/api/recomendacoes', recomendacoesRoutes);
 
 //Start server
-app.listen(port);
-console.log('Magic happens on port ' + port);
+app.listen(port, () => {
+    console.log("We're running on " + port + " port!" );
+});
+
