@@ -19,18 +19,18 @@ router.post('/', celebrate({
         pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião').required()
     })
 }),
-admin_funcionarioTokenValidation,
+/*admin_funcionarioTokenValidation,*/
 packagesController.postPackages
 );
 
 // GET all packages http://localhost:8090/api/packages
-router.get('/', admin_funcionarioTokenValidation, packagesController.getPackages);
+router.get('/', /*admin_funcionarioTokenValidation,*/ packagesController.getPackages);
 
 // GET packages by ID http://localhost:8090/api/packages/:id
 router.get('/:id', admin_funcionarioTokenValidation, packagesController.getPackagesById);
 
 // GET packages by city name http://localhost:8090/api/packages/city/:city
-router.get('/city/:city', TokenValidation, packagesController.getPackagesByName);
+router.get('/city/:city', /*TokenValidation,*/ packagesController.getPackagesByName);
 
 //UPDATE packages by ID 
 router.put(
@@ -51,7 +51,7 @@ router.put(
       pack_type: Joi.string().valid('Hotel', 'Avião', 'Hotel e Avião')
     })
   }),
-   admin_funcionarioTokenValidation,
+   /*admin_funcionarioTokenValidation,*/
    packagesController.updatePackages
 );
 

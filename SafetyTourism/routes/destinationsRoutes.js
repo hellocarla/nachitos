@@ -29,7 +29,7 @@ router.post('/', celebrate({
 );
 
 // GET all destinations
-router.get('/', TokenValidation, destinationsController.getDestinations);
+router.get('/', /*TokenValidation,*/ destinationsController.getDestinations);
 
 // GET destination by ID
 router.get('/:_id', TokenValidation, destinationsController.getDestinationById);
